@@ -1,37 +1,76 @@
 import React, { useEffect, useState } from "react";
 import CoinTable from "../components/CoinTable";
-import cryptoData from "../data/cryptoData";
-console.log("cryptoData:", cryptoData);
 import SearchParams from "../components/SearchParams";
 
 const Home = () => {
-  const [data, setData] = useState([]);
-  console.log("HELLO!!!");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState([]); // THis contains the unfiltered data
+  const [filteredData, setFilteredData] = useState([]); // This contains the filtered data, assuming we have a searchTerm
 
   useEffect(() => {
     // Make the fetch request here!
 
     async function requestCoins() {
-      try {
-        const res = await fetch(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`
-        );
-        const json = await res.json();
-        if (json.error_code) return setData(cryptoData);
-        setData(json);
-      } catch (err) {
-        console.log("API call refused. Getting data from cryptoData");
-        setData(cryptoData);
-      }
+      const res = await fetch(`https://api.coincap.io/v2/assets`);
+      const json = await res.json();
+      setData(json.data);
+      setFilteredData(json.data);
     }
 
     requestCoins();
-  }, []);
+  }, []); // The array is called "dependency array"
+
+  useEffect(() => {
+    // If searchTerm is undefined or empty, simply stop
+    if (!searchTerm) return setFilteredData(data);
+
+    // Otherwise, we start filtering
+    const filtered = data.filter((coin) => {
+      // name: "Bitcoin" --- searchTerm === "bit"
+      // bitcoin.include("bit") // True
+      // bitcoin.include("zet") // False
+      return coin.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
+    setFilteredData(filtered);
+  }, [searchTerm]);
 
   return (
     <div className="home-container">
-      <SearchParams />
-      <CoinTable data={data} />
+      {/* <SearchParams /> */}
+
+      <div className="search">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            // If searchTerm is undefined or empty, simply stop
+            if (!searchTerm) return setFilteredData(data);
+
+            // Otherwise, we start filtering
+            const filtered = data.filter((coin) => {
+              // name: "Bitcoin" --- searchTerm === "bit"
+              // bitcoin.include("bit") // True
+              // bitcoin.include("zet") // False
+              return coin.name.toLowerCase().includes(searchTerm.toLowerCase());
+            });
+
+            setFilteredData(filtered);
+          }}
+        >
+          <label htmlFor="coin">
+            <input
+              onChange={(event) => setSearchTerm(event.target.value)}
+              id="coin"
+              value={searchTerm}
+              placeholder="Type to search"
+            />
+          </label>
+          <button>Submit</button>
+        </form>
+      </div>
+
+      <CoinTable data={filteredData} />
     </div>
   );
 };

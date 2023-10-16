@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./pages/HomePage";
+import Test from "./pages/TestPage";
 import About from "./pages/AboutPage";
 import Header from "./components/Header";
 
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="about" element={<About />} />
       <Route path="/" element={<SearchParams />} />
+      <Route path="/test" element={<Test />} />
     </Route>
   )
 );

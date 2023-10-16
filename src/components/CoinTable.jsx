@@ -23,17 +23,17 @@ const CoinTable = ({ data }) => {
           <tbody>
             {data.map((coin) => (
               <tr key={coin.id}>
-                <td>{coin.market_cap_rank}</td>
+                <td>{coin.rank}</td>
                 <td>
                   <div className="coin">
-                    <img src={coin.image} alt={coin.symbol} width={20} />
+                    {/* <img src={coin.image} alt={coin.symbol} width={20} /> */}
                     <h4>{coin.name}</h4>
                     <small>{coin.symbol}</small>
                   </div>
                 </td>
-                <td>{coin.current_price}</td>
-                <td>{coin.price_change_percentage_24h.toFixed(2)}</td>
-                <td>{coin.market_cap}</td>
+                <td>{parseFloat(coin.priceUsd).toFixed(2)}</td>
+                <td>{parseFloat(coin.changePercent24Hr).toFixed(2)}</td>
+                <td>{parseFloat(coin.marketCapUsd).toFixed(2)}</td>
                 <td>Coin chart</td>
                 <td className="whitespace-nowrap px-4 py-2">
                   <a
