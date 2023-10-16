@@ -1,0 +1,104 @@
+body {
+  font-family: sans-serif;
+  background: #1c1c20;
+}
+
+.title {
+  margin: 2em;
+  text-align: center;
+}
+
+.title a {
+  color: #2dc1fc;
+  margin-left: 0.5em;
+}
+
+.crypto-prices {
+  color: #fff;
+}
+
+.crypto-prices img {
+  width: 2em;
+}
+
+.crypto-prices table {
+  width: 90%;
+  max-width: 1100px;
+  min-width: 800px;
+  margin: 1em auto;
+  border-collapse: collapse;
+  background-color: #31333a;
+}
+
+.crypto-prices th {
+  text-align: left;
+  background-color: #53545c;
+}
+
+.crypto-prices th,
+.crypto-prices td {
+  padding: 1em;
+  border: 1px solid #272831;
+}
+
+.coin {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.coin small {
+  text-transform: uppercase;
+  color: #b5b6bd;
+}
+
+.crypto-prices thead {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.crypto-prices tr:nth-child(odd) {
+  background-color: #2a2b32;
+}
+
+.crypto-prices th:first-child,
+.crypto-prices td:first-child {
+  text-align: center;
+}
+
+.rising {
+  color: #25df3e;
+}
+
+.falling {
+  color: #ff3131;
+}
+
+.pagination {
+  margin: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.pagination button {
+  padding: 0.7em 1.7em;
+  font-size: 1.1em;
+  background-color: #53545c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 200ms;
+}
+
+.pagination button:hover {
+  background-color: #3f4046;
+}
+
+.chart {
+  color: #000;
+}

@@ -3,113 +3,63 @@
 
 //   This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
 // -->
-import React from "react";
+// import React from "react";
 import cryptoData from "../data/cryptoData";
+import "../styles/coin-table.css";
 
 const CoinTable = () => {
   return (
     <>
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-          <thead className="ltr:text-left rtl:text-right">
+        <table className="min-w-full divide-y-2 divide-gray-200 bg-black text-sm">
+          <thead>
             <tr>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                #
+                Rank
               </th>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Coin
+                Name
               </th>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                 Price
               </th>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                1hr
+                24hr Change %
               </th>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                24hr
+                Market Cap (000s)
               </th>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                7d
+                Add to Watchlist
               </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                24hr Volume
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Market Cap
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                7d Chart
-              </th>
+
               <th className="px-4 py-2" />
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
-            <tr>
-              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                John Doe
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                24/05/1995
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                Web Developer
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                $120,000
-              </td>
-              <td className="whitespace-nowrap px-4 py-2">
-                <a
-                  href="#"
-                  className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                >
-                  View
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Jane Doe
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                04/11/1980
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                Web Designer
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                $100,000
-              </td>
-              <td className="whitespace-nowrap px-4 py-2">
-                <a
-                  href="#"
-                  className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                >
-                  View
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Gary Barlow
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                24/05/1995
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                Singer
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                $20,000
-              </td>
-              <td className="whitespace-nowrap px-4 py-2">
-                <a
-                  href="#"
-                  className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                >
-                  View
-                </a>
-              </td>
-            </tr>
+          <tbody>
+            {cryptoData.map((coin) => (
+              <tr key={coin.id}>
+                <td>{coin.market_cap_rank}</td>
+                <td>
+                  <div className="coin">
+                    <img src={coin.image} alt={coin.symbol} />
+                    <h4>{coin.name}</h4>
+                    <small>{coin.symbol}</small>
+                  </div>
+                </td>
+                <td>{coin.current_price}</td>
+                <td>{coin.price_change_percentage_24h.toFixed(2)}</td>
+                <td>{coin.market_cap}</td>
+                <td className="whitespace-nowrap px-4 py-2">
+                  <a
+                    href="#"
+                    className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                  >
+                    Add
+                  </a>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
