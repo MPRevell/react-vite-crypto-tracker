@@ -4,7 +4,7 @@ const cryptoData = [
     symbol: "btc",
     name: "Bitcoin",
     image:
-      "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+      "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1696501400",
     current_price: 21947,
     market_cap: 428719538425,
     market_cap_rank: 1,
@@ -33,7 +33,7 @@ const cryptoData = [
     symbol: "eth",
     name: "Ethereum",
     image:
-      "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+      "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
     current_price: 1267.92,
     market_cap: 152625444221,
     market_cap_rank: 2,
@@ -66,7 +66,7 @@ const cryptoData = [
     symbol: "usdt",
     name: "Tether",
     image:
-      "https://assets.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+      "https://assets.coingecko.com/coins/images/325/small/Tether.png?1696501661",
     current_price: 0.818459,
     market_cap: 68358538635,
     market_cap_rank: 3,
@@ -95,7 +95,7 @@ const cryptoData = [
     symbol: "bnb",
     name: "BNB",
     image:
-      "https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+      "https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1696501970",
     current_price: 168.53,
     market_cap: 25931016521,
     market_cap_rank: 4,
@@ -124,7 +124,7 @@ const cryptoData = [
     symbol: "xrp",
     name: "XRP",
     image:
-      "https://assets.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png?1696501442",
+      "https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png?1696501442",
     current_price: 0.394669,
     market_cap: 21111938933,
     market_cap_rank: 5,
@@ -153,7 +153,7 @@ const cryptoData = [
     symbol: "usdc",
     name: "USDC",
     image:
-      "https://assets.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+      "https://assets.coingecko.com/coins/images/6319/small/usdc.png?1696506694",
     current_price: 0.818687,
     market_cap: 20545762080,
     market_cap_rank: 6,
@@ -182,7 +182,7 @@ const cryptoData = [
     symbol: "steth",
     name: "Lido Staked Ether",
     image:
-      "https://assets.coingecko.com/coins/images/13442/large/steth_logo.png?1696513206",
+      "https://assets.coingecko.com/coins/images/13442/small/steth_logo.png?1696513206",
     current_price: 1267.14,
     market_cap: 11197132154,
     market_cap_rank: 7,
@@ -211,7 +211,7 @@ const cryptoData = [
     symbol: "sol",
     name: "Solana",
     image:
-      "https://assets.coingecko.com/coins/images/4128/large/solana.png?1696504756",
+      "https://assets.coingecko.com/coins/images/4128/small/solana.png?1696504756",
     current_price: 17.52,
     market_cap: 7295041781,
     market_cap_rank: 8,
@@ -240,7 +240,7 @@ const cryptoData = [
     symbol: "ada",
     name: "Cardano",
     image:
-      "https://assets.coingecko.com/coins/images/975/large/cardano.png?1696502090",
+      "https://assets.coingecko.com/coins/images/975/small/cardano.png?1696502090",
     current_price: 0.2017,
     market_cap: 7019460378,
     market_cap_rank: 9,
@@ -269,7 +269,7 @@ const cryptoData = [
     symbol: "doge",
     name: "Dogecoin",
     image:
-      "https://assets.coingecko.com/coins/images/5/large/dogecoin.png?1696501409",
+      "https://assets.coingecko.com/coins/images/5/small/dogecoin.png?1696501409",
     current_price: 0.04745617,
     market_cap: 6714278272,
     market_cap_rank: 10,
@@ -298,7 +298,7 @@ const cryptoData = [
     symbol: "trx",
     name: "TRON",
     image:
-      "https://assets.coingecko.com/coins/images/1094/large/tron-logo.png?1696502193",
+      "https://assets.coingecko.com/coins/images/1094/small/tron-logo.png?1696502193",
     current_price: 0.069798,
     market_cap: 6221470251,
     market_cap_rank: 11,
@@ -331,7 +331,7 @@ const cryptoData = [
     symbol: "ton",
     name: "Toncoin",
     image:
-      "https://assets.coingecko.com/coins/images/17980/large/ton_symbol.png?1696517498",
+      "https://assets.coingecko.com/coins/images/17980/small/ton_symbol.png?1696517498",
     current_price: 1.6,
     market_cap: 5538976201,
     market_cap_rank: 12,
@@ -360,7 +360,7 @@ const cryptoData = [
     symbol: "matic",
     name: "Polygon",
     image:
-      "https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png?1696505277",
+      "https://assets.coingecko.com/coins/images/4713/small/matic-token-icon.png?1696505277",
     current_price: 0.418897,
     market_cap: 3901412718,
     market_cap_rank: 13,
@@ -393,7 +393,7 @@ const cryptoData = [
     symbol: "dot",
     name: "Polkadot",
     image:
-      "https://assets.coingecko.com/coins/images/12171/large/polkadot.png?1696512008",
+      "https://assets.coingecko.com/coins/images/12171/small/polkadot.png?1696512008",
     current_price: 3.02,
     market_cap: 3878328220,
     market_cap_rank: 14,
@@ -422,7 +422,7 @@ const cryptoData = [
     symbol: "ltc",
     name: "Litecoin",
     image:
-      "https://assets.coingecko.com/coins/images/2/large/litecoin.png?1696501400",
+      "https://assets.coingecko.com/coins/images/2/small/litecoin.png?1696501400",
     current_price: 50.32,
     market_cap: 3711773916,
     market_cap_rank: 15,
@@ -451,7 +451,7 @@ const cryptoData = [
     symbol: "wbtc",
     name: "Wrapped Bitcoin",
     image:
-      "https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png?1696507857",
+      "https://assets.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png?1696507857",
     current_price: 21938,
     market_cap: 3585937396,
     market_cap_rank: 16,
@@ -480,7 +480,7 @@ const cryptoData = [
     symbol: "bch",
     name: "Bitcoin Cash",
     image:
-      "https://assets.coingecko.com/coins/images/780/large/bitcoin-cash-circle.png?1696501932",
+      "https://assets.coingecko.com/coins/images/780/small/bitcoin-cash-circle.png?1696501932",
     current_price: 174.44,
     market_cap: 3406114487,
     market_cap_rank: 17,
@@ -509,7 +509,7 @@ const cryptoData = [
     symbol: "shib",
     name: "Shiba Inu",
     image:
-      "https://assets.coingecko.com/coins/images/11939/large/shiba.png?1696511800",
+      "https://assets.coingecko.com/coins/images/11939/small/shiba.png?1696511800",
     current_price: 5.59e-6,
     market_cap: 3299963875,
     market_cap_rank: 18,
@@ -538,7 +538,7 @@ const cryptoData = [
     symbol: "link",
     name: "Chainlink",
     image:
-      "https://assets.coingecko.com/coins/images/877/large/chainlink-new-logo.png?1696502009",
+      "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1696502009",
     current_price: 5.91,
     market_cap: 3281575669,
     market_cap_rank: 19,
@@ -567,7 +567,7 @@ const cryptoData = [
     symbol: "dai",
     name: "Dai",
     image:
-      "https://assets.coingecko.com/coins/images/9956/large/Badge_Dai.png?1696509996",
+      "https://assets.coingecko.com/coins/images/9956/small/Badge_Dai.png?1696509996",
     current_price: 0.817682,
     market_cap: 3095358224,
     market_cap_rank: 20,
@@ -596,7 +596,7 @@ const cryptoData = [
     symbol: "leo",
     name: "LEO Token",
     image:
-      "https://assets.coingecko.com/coins/images/8418/large/leo-token.png?1696508607",
+      "https://assets.coingecko.com/coins/images/8418/small/leo-token.png?1696508607",
     current_price: 3.04,
     market_cap: 2830590639,
     market_cap_rank: 21,
@@ -625,7 +625,7 @@ const cryptoData = [
     symbol: "tusd",
     name: "TrueUSD",
     image:
-      "https://assets.coingecko.com/coins/images/3449/large/tusd.png?1696504140",
+      "https://assets.coingecko.com/coins/images/3449/small/tusd.png?1696504140",
     current_price: 0.817027,
     market_cap: 2757318113,
     market_cap_rank: 22,
@@ -654,7 +654,7 @@ const cryptoData = [
     symbol: "avax",
     name: "Avalanche",
     image:
-      "https://assets.coingecko.com/coins/images/12559/large/Avalanche_Circle_RedWhite_Trans.png?1696512369",
+      "https://assets.coingecko.com/coins/images/12559/small/Avalanche_Circle_RedWhite_Trans.png?1696512369",
     current_price: 7.49,
     market_cap: 2660091705,
     market_cap_rank: 23,
@@ -683,7 +683,7 @@ const cryptoData = [
     symbol: "uni",
     name: "Uniswap",
     image:
-      "https://assets.coingecko.com/coins/images/12504/large/uni.jpg?1696512319",
+      "https://assets.coingecko.com/coins/images/12504/small/uni.jpg?1696512319",
     current_price: 3.3,
     market_cap: 2486131846,
     market_cap_rank: 24,
@@ -712,7 +712,7 @@ const cryptoData = [
     symbol: "xlm",
     name: "Stellar",
     image:
-      "https://assets.coingecko.com/coins/images/100/large/Stellar_symbol_black_RGB.png?1696501482",
+      "https://assets.coingecko.com/coins/images/100/small/Stellar_symbol_black_RGB.png?1696501482",
     current_price: 0.083909,
     market_cap: 2333053459,
     market_cap_rank: 25,
@@ -741,7 +741,7 @@ const cryptoData = [
     symbol: "xmr",
     name: "Monero",
     image:
-      "https://assets.coingecko.com/coins/images/69/large/monero_logo.png?1696501460",
+      "https://assets.coingecko.com/coins/images/69/small/monero_logo.png?1696501460",
     current_price: 124.94,
     market_cap: 2270439554,
     market_cap_rank: 26,
@@ -770,7 +770,7 @@ const cryptoData = [
     symbol: "okb",
     name: "OKB",
     image:
-      "https://assets.coingecko.com/coins/images/4463/large/WeChat_Image_20220118095654.png?1696505053",
+      "https://assets.coingecko.com/coins/images/4463/small/WeChat_Image_20220118095654.png?1696505053",
     current_price: 34.91,
     market_cap: 2096303064,
     market_cap_rank: 27,
@@ -799,7 +799,7 @@ const cryptoData = [
     symbol: "busd",
     name: "BUSD",
     image:
-      "https://assets.coingecko.com/coins/images/9576/large/BUSDLOGO.jpg?1696509654",
+      "https://assets.coingecko.com/coins/images/9576/small/BUSDLOGO.jpg?1696509654",
     current_price: 0.818991,
     market_cap: 1749557419,
     market_cap_rank: 28,
@@ -828,7 +828,7 @@ const cryptoData = [
     symbol: "etc",
     name: "Ethereum Classic",
     image:
-      "https://assets.coingecko.com/coins/images/453/large/ethereum-classic-logo.png?1696501717",
+      "https://assets.coingecko.com/coins/images/453/small/ethereum-classic-logo.png?1696501717",
     current_price: 12.1,
     market_cap: 1733556589,
     market_cap_rank: 29,

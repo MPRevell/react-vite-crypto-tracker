@@ -14,24 +14,12 @@ const CoinTable = () => {
         <table className="min-w-full divide-y-2 divide-gray-200 bg-black text-sm">
           <thead>
             <tr>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Rank
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Name
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Price
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                24hr Change %
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Market Cap (000s)
-              </th>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Add to Watchlist
-              </th>
+              <th>#</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>24hr Change %</th>
+              <th>Market Cap</th>
+              <th>Add to Watchlist</th>
 
               <th className="px-4 py-2" />
             </tr>
