@@ -1,6 +1,7 @@
 import React from "react";
 import HyperUIComponentExample from "../components/HyperUIComponentExample";
 import HyperUIComponentExample2 from "../components/HyperUIComponentExample2";
+import CoinTable from "../components/CoinTable";
 
 const About = () => {
   return (
@@ -10,6 +11,7 @@ const About = () => {
         HyperUI Component Examples:
         <HyperUIComponentExample />
         <HyperUIComponentExample2 />
+        <CoinTable />
       </div>
     </div>
   );
