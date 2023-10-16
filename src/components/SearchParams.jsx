@@ -1,21 +1,42 @@
 import { useState } from "react";
-import cryptoData from "../data/cryptoData";
 
 const SearchParams = () => {
-  const [coin, setCoin] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // User's search query
+  const [coins, setCoins] = useState([]); // Results from the API
+
+  async function requestCoins() {
+    const res = await fetch(
+      `https://api.coingecko.com/api/v3/search?query=${searchTerm}`
+    );
+    const json = await res.json();
+    console.log(json);
+    setCoins(json.coins);
+  }
+
   return (
-    <div className="search-params">
-      <form>
+    <div className="search">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestCoins();
+        }}
+      >
         <label htmlFor="coin">
           <input
-            onChange={(event) => setCoin(event.target.value)}
+            onChange={(event) => setSearchTerm(event.target.value)}
             id="coin"
-            value={coin}
-            placeholder="Search"
+            value={searchTerm}
+            placeholder="Type to search"
           />
         </label>
-        <button>Submit </button>
+        <button>Submit</button>
       </form>
+
+      {coins.map((coin) => (
+        <div key={coin.id}>
+          {coin.name}: ${coin.price}
+        </div>
+      ))}
     </div>
   );
 };
