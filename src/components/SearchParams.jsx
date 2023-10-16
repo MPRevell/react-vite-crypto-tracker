@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 const SearchParams = () => {
-  const [searchTerm, setSearchTerm] = useState(""); // User's search query
-  const [coins, setCoins] = useState([]); // Results from the API
+  const [searchTerm, setSearchTerm] = useState(""); // Here I am getting the search query.
+  const [coins, setCoins] = useState([]); // then we store the results from API
 
   async function requestCoins() {
     const res = await fetch(
