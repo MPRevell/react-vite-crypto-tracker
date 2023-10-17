@@ -2,13 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Oxygen&family=Oxygen+Mono&display=swap");
+
 #root {
   max-width: 16000px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
   width: 100vw;
   height: 100vh;
+}
+
+.card {
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+a {
+  text-decoration: none;
+  color: gold;
 }
 
 #app-container {
@@ -55,4 +68,8 @@
 nav ul {
   display: flex;
   gap: 45px;
+}
+
+.explore {
+  height: 200px;
 }

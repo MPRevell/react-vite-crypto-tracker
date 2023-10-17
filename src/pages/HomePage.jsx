@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CoinTable from "../components/CoinTable";
 // import SearchParams from "../components/SearchParams";
+import Banner from "../components/Banner";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -33,16 +34,10 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* <SearchParams /> */}
-      <label htmlFor="coin" className="px-4">
-        <input
-          onChange={(event) => setSearchTerm(event.target.value)}
-          id="coin"
-          value={searchTerm}
-          placeholder="Type to search"
-        />
-      </label>
-      <CoinTable data={filteredData} />
+      <Banner searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <div className="coin-table">
+        <CoinTable data={filteredData} />
+      </div>
     </div>
   );
 };
