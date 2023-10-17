@@ -8,16 +8,16 @@ import {
 import Home from "./pages/HomePage";
 import Test from "./pages/TestPage";
 import About from "./pages/AboutPage";
-import Header from "./components/Header";
+import Navbar from "./components/shared/Navbar";
 
 import SearchParams from "./components/SearchParams";
 import "./App.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Header />}>
+    <Route path="/" element={<Navbar />}>
       <Route index element={<Home />} />
-      <Route path="about" element={<About />} />
+      <Route path="/about/:coin" element={<About />} />
       <Route path="/" element={<SearchParams />} />
       <Route path="/test" element={<Test />} />
     </Route>

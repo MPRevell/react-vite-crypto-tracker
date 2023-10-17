@@ -1,17 +1,17 @@
-// import cryptoData from "../data/cryptoData";
-// import { Link } from "react-router-dom";
-// import "../styles/coin-table.css";
+import { useNavigate } from "react-router-dom";
 
 const CoinTable = ({ data }) => {
   const formatNumbers = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left bg-sky-500 text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-white-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xs text-white-700  bg-gray-50 dark:bg-gray-950 dark:text-gray-200">
             <tr>
               <th scope="col" className="px-6 py-3 text-center">
                 #
@@ -22,16 +22,16 @@ const CoinTable = ({ data }) => {
               <th scope="col" className="px-6 py-3">
                 Price
               </th>
-              <th scope="col" className="px-6 py-3">
-                24hr Price Change
+              <th scope="col" className="px-6 py-3 text-center">
+                24hr %
               </th>
               <th scope="col" className="px-6 py-3">
                 Market Cap
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-center">
                 7d Chart
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-center">
                 Add to Watchlist
               </th>
             </tr>
@@ -39,8 +39,12 @@ const CoinTable = ({ data }) => {
           <tbody>
             {data.map((coin) => (
               <tr
+                onClick={() => {
+                  navigate(`/about/${coin.id}`);
+                }}
                 key={coin.id}
                 className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 overflow-x-auto"
+                // Here I need to add an onClick event to take user to specific crypyo page.
               >
                 <td className="text-center">{coin.rank}</td>
                 <th
@@ -74,7 +78,8 @@ const CoinTable = ({ data }) => {
                 <td className="px-6 py-4 text-center">
                   <a
                     href="#"
-                    className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700" // Here I want to add functionality to click Add and is stored on user's watchlist.
+                    className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                    // Here I want to add functionality to click Add and is stored on user's watchlist.
                   >
                     Add
                   </a>

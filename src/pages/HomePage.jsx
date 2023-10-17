@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CoinTable from "../components/CoinTable";
 // import SearchParams from "../components/SearchParams";
 import Banner from "../components/Banner";
+import Navbar from "../components/shared/Navbar";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
