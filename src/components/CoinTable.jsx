@@ -6,7 +6,7 @@ const CoinTable = ({ data }) => {
   };
 
   const navigate = useNavigate();
-  const coins = data.coins;
+  console.log(data);
 
   return (
     <>
@@ -38,7 +38,7 @@ const CoinTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {coins.map((coin) => (
+            {data.map((coin) => (
               <tr
                 onClick={() => {
                   navigate(`/about/${coin.name}`);

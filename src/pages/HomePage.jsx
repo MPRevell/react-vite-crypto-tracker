@@ -14,8 +14,8 @@ const Home = () => {
     async function requestCoins() {
       const res = await fetch(`https://api.coinranking.com/v2/coins`);
       const json = await res.json();
-      setData(json.data);
-      setFilteredData(json.data);
+      setData(json.data.coins);
+      setFilteredData(json.data.coins);
     }
     requestCoins();
   }, []);
