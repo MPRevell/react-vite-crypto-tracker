@@ -6,7 +6,6 @@ const CoinTable = ({ data }) => {
   };
 
   const navigate = useNavigate();
-  console.log(data);
 
   return (
     <>
@@ -41,11 +40,10 @@ const CoinTable = ({ data }) => {
             {data.map((coin) => (
               <tr
                 onClick={() => {
-                  navigate(`/about/${coin.name}`);
+                  navigate(`/about/${coin.uuid}`);
                 }}
                 key={coin.uuid}
                 className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 overflow-x-auto"
-                // Here I need to add an onClick event to take user to specific crypyo page.
               >
                 <td className="text-center">{coin.rank}</td>
                 <th
