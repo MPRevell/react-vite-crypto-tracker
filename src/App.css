@@ -78,3 +78,9 @@ nav ul {
 .explore {
   height: 200px;
 }
+
+.table-container {
+  overflow: hidden;
+  border: 1px black none;
+  border-radius: 5px;
+}
