@@ -7,27 +7,11 @@ import { CategoryScale, Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 Chart.register(CategoryScale);
 
-function humanReadableLabels(labels, timePeriod) {
-  console.log("labels:", labels);
-  let sanitizedLabels = [];
-
-  switch (timePeriod) {
-    case "1y":
-      sanitizedLabels = labels.map((label) => months[parseInt(label) - 1]);
-      break;
-    default:
-    // code block
-  }
-
-  console.log("sanitizedLabels", sanitizedLabels);
-  return sanitizedLabels;
-}
-
 const About = () => {
   const { coin } = useParams();
 
   const [data, setData] = useState(null);
-  const [timePeriodState, setTimePeriodState] = useState("7d"); // default time period is 24h
+  const [timePeriodState, setTimePeriodState] = useState("24h");
 
   useEffect(() => {
     if (!coin) return;
