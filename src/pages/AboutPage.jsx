@@ -7,34 +7,52 @@ import { CategoryScale, Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 Chart.register(CategoryScale);
 
+function humanReadableLabels(labels, timePeriod) {
+  console.log("labels:", labels);
+  let sanitizedLabels = [];
+
+  switch (timePeriod) {
+    case "1y":
+      sanitizedLabels = labels.map((label) => months[parseInt(label) - 1]);
+      break;
+    default:
+    // code block
+  }
+
+  console.log("sanitizedLabels", sanitizedLabels);
+  return sanitizedLabels;
+}
+
 const About = () => {
   const { coin } = useParams();
 
   const [data, setData] = useState(null);
-  console.log(data);
+  const [timePeriodState, setTimePeriodState] = useState("24h"); // default time period is 24h
 
   useEffect(() => {
     if (!coin) return;
     console.log(`Prepare to fetch the data for ${coin}`);
 
     async function requestCoinDetails() {
-      const res = await fetch(`https://api.coinranking.com/v2/coin/${coin}`);
+      const res = await fetch(
+        `https://api.coinranking.com/v2/coin/${coin}?timePeriod=${timePeriodState}`
+      );
       const json = await res.json();
+      console.log("json", json);
       setData(json.data.coin);
     }
     requestCoinDetails();
-  }, [coin]);
+  }, [coin, timePeriodState]);
+
+  const handleChangeTimePeriodState = (timePeriodState) => {
+    setTimePeriodState(timePeriodState);
+  };
 
   /*
+  To change time period => we use ?timePeriod=${timePeriod} // I want to set this to a button, so when users select a different time it re-renders and updates with the relevant info.
 
-  to change time period => we use ?timePeriod=${timePeriod} // I want to set this to a button, so when users select a different time it re-renders and updates with the relevant info.
-
-  I want 24hr (default) 7d, 30d, 3m, 1y, 3y - implement the logic to change this.
-
-  Add functionality whereby if latest entry of data is higher than first entry => Green line : red line
-
+  I want 24hr (default) 7d, 30d, 3m, 1y, 3y - implement the logic to change this. Add functionality whereby if latest entry of data is higher than first entry => Green line : red line
   */
-
   return (
     <div className="sss">
       {data ? (
@@ -44,38 +62,21 @@ const About = () => {
             <h1 className="text-4xl font-bold text-blue-500 dark:text-blue-300 mb-2">
               {data.name}
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-4">
+            <p className="text-left text-lg text-gray-500 dark:text-gray-200 mb-4">
               {data.description}
+              check out their website at:{" "}
+              <a href={data.websiteUrl} target="blank">
+                {" "}
+                website
+              </a>
             </p>
-            <div className="coin-chart w-11/12 lg:w-3/4 xl:w-2/3 mb-6 bg-blue-200 dark:bg-gray-900 h-64 rounded-lg p-4">
+            <div className="flex justify-center items-centerw-11/12 lg:w-3/4 xl:w-2/3 mb-6 bg-blue-200 dark:bg-gray-900 h-64 rounded-lg p-4">
               <Line
                 data={{
-                  labels: [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                    "6",
-                    "7",
-                    "8",
-                    "9",
-                    "10",
-                    "11",
-                    "12",
-                    "13",
-                    "14",
-                    "15",
-                    "16",
-                    "17",
-                    "18",
-                    "19",
-                    "20",
-                    "21",
-                    "22",
-                    "23",
-                    "24",
-                  ],
+                  labels: Array.from(
+                    { length: data.sparkline.length },
+                    (_, i) => (i + 1).toString()
+                  ),
                   datasets: [
                     {
                       label: "Price ($)",
@@ -95,10 +96,18 @@ const About = () => {
                 Time Period:
               </span>{" "}
               {/* Label for the time periods */}
-              {["1H", "3H", "12H", "24H", "7D", "30D"].map((timePeriod) => (
+              {["1h", "12h", "24h", "7d", "30d", "1y"].map((timePeriod) => (
                 <button
                   key={timePeriod}
-                  className="px-4 py-2 bg-blue-500 dark:bg-blue-700 text-white rounded-md hover:bg-blue-600 dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600"
+                  onClick={() => handleChangeTimePeriodState(timePeriod)}
+                  // Equivalent to above
+                  // onClick={() => setTimePeriodState(timePeriod)}
+
+                  className={`px-4 py-2 text-white rounded-md hover:bg-blue-600 dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 ${
+                    timePeriod === timePeriodState
+                      ? "bg-blue-500 dark:bg-blue-700"
+                      : ""
+                  }`}
                 >
                   {timePeriod}
                 </button>

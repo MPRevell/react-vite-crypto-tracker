@@ -7,6 +7,8 @@ const CoinTable = ({ data }) => {
 
   const navigate = useNavigate();
 
+  console.log("data", data);
+
   return (
     <>
       <div className="overflow-x-auto px-8">
@@ -44,7 +46,7 @@ const CoinTable = ({ data }) => {
                     navigate(`/about/${coin.uuid}`);
                   }}
                   key={coin.uuid}
-                  className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 overflow-x-auto"
+                  className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                 >
                   <td className="text-center">{coin.rank}</td>
                   <th
@@ -53,9 +55,14 @@ const CoinTable = ({ data }) => {
                   >
                     <div className="coin">
                       {/* <img src={coin.image} alt={coin.symbol} width={20} /> */}
+                      <img
+                        src={coin.iconUrl}
+                        alt="Logo"
+                        width="25"
+                        height="auto"
+                      />
                       <h4>{coin.name}</h4>
                       <small>{coin.symbol}</small>
-                      <img src={coin.iconURL} alt="Logo" />
                     </div>
                   </th>
                   <td className="px-6 py-4">

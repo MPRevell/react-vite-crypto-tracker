@@ -84,3 +84,11 @@ nav ul {
   border: 1px black none;
   border-radius: 5px;
 }
+
+.coin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  gap: 8px;
+}
