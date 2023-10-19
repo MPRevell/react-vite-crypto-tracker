@@ -26,7 +26,6 @@ const About = () => {
         <>
           This is the about page.
           <div style={{ width: "50%", margin: "0 auto", marginTop: "1em" }}>
-            HyperUI Component Examples:
             <div> Lets see if data is passing correctly {data?.name} </div>
           </div>
         </>

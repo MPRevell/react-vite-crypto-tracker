@@ -54,7 +54,7 @@ const CoinTable = ({ data }) => {
                     {/* <img src={coin.image} alt={coin.symbol} width={20} /> */}
                     <h4>{coin.name}</h4>
                     <small>{coin.symbol}</small>
-                    <img src={coin.iconURL} />
+                    <img src={coin.iconURL} alt="Logo" />
                   </div>
                 </th>
                 <td className="px-6 py-4">
