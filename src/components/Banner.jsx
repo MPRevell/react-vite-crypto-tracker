@@ -1,5 +1,3 @@
-import React from "react";
-
 function Banner({ searchTerm, setSearchTerm }) {
   return (
     <section className="dark:bg-gray-900 bg-white text-white">

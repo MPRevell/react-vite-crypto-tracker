@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import CoinTable from "../components/CoinTable";
 // import SearchParams from "../components/SearchParams";
 import Banner from "../components/Banner";
-import Navbar from "../components/shared/Navbar";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,7 +12,7 @@ const Home = () => {
     // Make the fetch request here!
 
     async function requestCoins() {
-      const res = await fetch(`https://api.coincap.io/v2/assets`);
+      const res = await fetch(`https://api.coinranking.com/v2/coins`);
       const json = await res.json();
       setData(json.data);
       setFilteredData(json.data);

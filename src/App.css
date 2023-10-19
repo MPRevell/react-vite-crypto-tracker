@@ -1,8 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Oxygen&family=Oxygen+Mono&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Oxygen&family=Oxygen+Mono&display=swap");
 
 * {
   -webkit-box-sizing: border-box;

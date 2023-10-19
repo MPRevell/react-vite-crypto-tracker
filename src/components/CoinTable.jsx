@@ -6,6 +6,7 @@ const CoinTable = ({ data }) => {
   };
 
   const navigate = useNavigate();
+  const coins = data.coins;
 
   return (
     <>
@@ -37,12 +38,12 @@ const CoinTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((coin) => (
+            {coins.map((coin) => (
               <tr
                 onClick={() => {
-                  navigate(`/about/${coin.id}`);
+                  navigate(`/about/${coin.name}`);
                 }}
-                key={coin.id}
+                key={coin.uuid}
                 className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 overflow-x-auto"
                 // Here I need to add an onClick event to take user to specific crypyo page.
               >
@@ -55,24 +56,25 @@ const CoinTable = ({ data }) => {
                     {/* <img src={coin.image} alt={coin.symbol} width={20} /> */}
                     <h4>{coin.name}</h4>
                     <small>{coin.symbol}</small>
+                    <img src={coin.iconURL} />
                   </div>
                 </th>
                 <td className="px-6 py-4">
-                  {formatNumbers(parseFloat(coin.priceUsd).toFixed(2))}
+                  {formatNumbers(parseFloat(coin.price).toFixed(2))}
                 </td>
                 <td className="px-6 py-4 text-center">
                   <span
                     className={`text-xs font-medium ${
-                      parseFloat(coin.changePercent24Hr) > 0
+                      parseFloat(coin.change) > 0
                         ? "text-green-600"
                         : "text-red-600"
                     }`}
                   >
-                    {parseFloat(coin.changePercent24Hr).toFixed(2)}%
+                    {parseFloat(coin.change).toFixed(2)}%
                   </span>
                 </td>
                 <td className="px-6 py-4">
-                  {formatNumbers(parseFloat(coin.marketCapUsd).toFixed(2))}
+                  {formatNumbers(parseFloat(coin.marketCap).toFixed(2))}
                 </td>
                 <td className="px-6 py-4">Coin chart</td>
                 <td className="px-6 py-4 text-center">
