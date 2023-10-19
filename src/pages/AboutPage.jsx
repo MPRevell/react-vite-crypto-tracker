@@ -27,7 +27,7 @@ const About = () => {
   const { coin } = useParams();
 
   const [data, setData] = useState(null);
-  const [timePeriodState, setTimePeriodState] = useState("24h"); // default time period is 24h
+  const [timePeriodState, setTimePeriodState] = useState("7d"); // default time period is 24h
 
   useEffect(() => {
     if (!coin) return;
