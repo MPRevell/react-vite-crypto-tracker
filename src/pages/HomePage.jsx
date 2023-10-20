@@ -30,7 +30,7 @@ const Home = () => {
     });
 
     setFilteredData(filtered);
-  }, [searchTerm]);
+  }, [searchTerm, data]);
 
   return (
     <div className="home-container">

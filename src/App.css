@@ -83,6 +83,7 @@ nav ul {
   overflow: hidden;
   border: 1px black none;
   border-radius: 5px;
+  display: flex;
 }
 
 .coin {

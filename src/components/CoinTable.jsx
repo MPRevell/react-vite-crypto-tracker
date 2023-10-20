@@ -6,9 +6,6 @@ const CoinTable = ({ data }) => {
   };
 
   const navigate = useNavigate();
-
-  console.log("data", data);
-
   return (
     <>
       <div className="overflow-x-auto px-8">

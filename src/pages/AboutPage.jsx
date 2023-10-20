@@ -41,12 +41,12 @@ const About = () => {
     <div className="sss">
       {data ? (
         <>
-          <div className="flex flex-col p-4 h-screen justify-center items-center text-blue-900 dark:text-slate-200 bg-gray-100 dark:bg-gray-800">
+          <div className="flex flex-col p-4 h-screen justify-center items-center text-blue-900 dark:text-slate-200 bg-gray-100 dark:bg-gray-900">
             {data.name}: ${parseFloat(data.price).toFixed(2)}
             <h1 className="text-4xl font-bold text-blue-500 dark:text-blue-300 mb-2">
               {data.name}
             </h1>
-            <p className="text-left text-lg text-gray-500 dark:text-gray-200 mb-4">
+            <p className="text-left text-lg text-gray-400 dark:text-gray-200 mb-4">
               {data.description}
               check out their website at:{" "}
               <a href={data.websiteUrl} target="blank">
@@ -54,7 +54,7 @@ const About = () => {
                 website
               </a>
             </p>
-            <div className="flex justify-center items-centerw-11/12 lg:w-3/4 xl:w-2/3 mb-6 bg-blue-200 dark:bg-gray-900 h-64 rounded-lg p-4">
+            <div className="flex justify-center items-centerw-11/12 lg:w-3/4 xl:w-2/3 mb-6 bg-blue-200 dark:bg-gray-950 h-64 rounded-lg p-4">
               <Line
                 data={{
                   labels: Array.from(
@@ -73,7 +73,7 @@ const About = () => {
               />
             </div>
             {/* Time Period Buttons */}
-            <div className="coin-chart-buttons flex items-center space-x-4 mt-4">
+            <div className="coin-chart-buttons border-solid rounded-md border-slate-900 border-2 border-radius-2 flex items-center p-2 space-x-4 mt-4">
               {" "}
               {/* Added items-center and space-x-4 for spacing and alignment */}
               <span className="text-lg text-gray-600 dark:text-gray-400">
