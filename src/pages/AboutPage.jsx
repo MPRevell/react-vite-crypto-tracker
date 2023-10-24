@@ -4,6 +4,15 @@ import { useParams } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart, registerables } from "chart.js";
 import Divider from "@mui/material/Divider";
+import {
+  IconTrophy,
+  IconCashBanknote,
+  IconTargetArrow,
+  IconDropletDollar,
+  IconDropletFilled,
+  IconDropletHalf2Filled,
+  IconDropletHalf2,
+} from "@tabler/icons-react";
 
 Chart.register(...registerables);
 Chart.register(CategoryScale);
@@ -35,6 +44,10 @@ const About = () => {
 
   const formatNumbers = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const volMarketCap = (a, b) => {
+    return (a / b).toFixed(2);
   };
 
   /*
@@ -137,9 +150,79 @@ const About = () => {
             </div>
           </div>
           <div className="coin-stats text-left flex-start mx-auto max-w-7xl py-4 px-2 sm:px-6 lg:px-8">
-            <h4 className="coin-stats-title font-bold text-l">
+            <h3 className="coin-stats-title font-bold text-l">
               Value statistics:
-            </h4>
+            </h3>
+            <div className="grid grid-cols-3 gap-4 mt-4">
+              <div>
+                <IconTrophy />
+                <p className="text-sm text-gray-400">Rank</p>
+                <p className="font-bold text-l">{data.rank}</p>{" "}
+              </div>
+
+              <div>
+                <IconCashBanknote />
+                <p className="text-sm text-gray-400">Price</p>
+                <p className="font-bold text-l">
+                  £{formatNumbers(parseFloat(data.price).toFixed(2))}
+                </p>
+              </div>
+              <div>
+                <IconDropletDollar />
+                <p className="text-sm text-gray-400">24h volume</p>
+                <p className="font-bold text-l">
+                  £{formatNumbers(parseFloat(data["24hVolume"]).toFixed(2))}
+                </p>{" "}
+                {/* Placeholder, replace with actual data */}
+              </div>
+              <div>
+                <IconDropletHalf2Filled />
+                <p className="text-sm text-gray-400">Market cap</p>
+                <p className="font-bold text-l">
+                  £{formatNumbers(parseFloat(data.marketCap).toFixed(2))}
+                </p>{" "}
+                {/* Placeholder, replace with actual data */}
+              </div>
+              <div>
+                <IconDropletHalf2 />
+                <p className="text-sm text-gray-400">Volume / Market cap</p>
+                <p className="font-bold text-l">
+                  {volMarketCap(
+                    parseFloat(data["24hVolume"]),
+                    parseFloat(data.marketCap)
+                  ) * 100}
+                  %
+                </p>{" "}
+              </div>
+              <div>
+                <IconDropletFilled />
+                <p className="text-sm text-gray-400">
+                  Fully diluted market cap
+                </p>
+                <p className="font-bold text-l">
+                  £
+                  {formatNumbers(
+                    parseFloat(data.fullyDilutedMarketCap).toFixed(2)
+                  )}
+                </p>{" "}
+                {/* Placeholder, replace with actual data */}
+              </div>
+              <div>
+                <IconTargetArrow />
+                <p className="text-sm text-gray-600">All-time high</p>
+                <p className="font-bold text-l">
+                  $
+                  {formatNumbers(parseFloat(data.allTimeHigh.price).toFixed(2))}
+                </p>{" "}
+                {/* Placeholder, replace with actual data */}
+                <p className="text-xs text-gray-500">
+                  on{" "}
+                  {new Date(
+                    data.allTimeHigh.timestamp * 1000
+                  ).toLocaleDateString()}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       ) : (

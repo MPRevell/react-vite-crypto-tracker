@@ -28,7 +28,7 @@ const CoinTable = ({ data }) => {
                 <th scope="col" className="px-6 py-3">
                   Market Cap
                 </th>
-                <th scope="col" className="px-6 py-3 text-center">
+                <th scope="col" className="px-6 py-3">
                   7d Chart
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
@@ -63,7 +63,7 @@ const CoinTable = ({ data }) => {
                     </div>
                   </th>
                   <td className="px-6 py-4">
-                    {formatNumbers(parseFloat(coin.price).toFixed(2))}
+                    ${formatNumbers(parseFloat(coin.price).toFixed(2))}
                   </td>
                   <td className="px-6 py-4 text-center">
                     <span
@@ -77,7 +77,7 @@ const CoinTable = ({ data }) => {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    {formatNumbers(parseFloat(coin.marketCap).toFixed(2))}
+                    ${formatNumbers(parseFloat(coin.marketCap).toFixed(2))}
                   </td>
                   <td className="px-6 py-4">Coin chart</td>
                   <td className="px-6 py-4 text-center">
