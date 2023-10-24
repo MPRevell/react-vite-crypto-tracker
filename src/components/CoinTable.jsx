@@ -1,4 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { Line } from "react-chartjs-2";
+import { CategoryScale, Chart, registerables } from "chart.js";
+
+Chart.register(...registerables);
+Chart.register(CategoryScale);
 
 const CoinTable = ({ data }) => {
   const formatNumbers = (number) => {
@@ -79,7 +84,32 @@ const CoinTable = ({ data }) => {
                   <td className="px-6 py-4">
                     ${formatNumbers(parseFloat(coin.marketCap).toFixed(2))}
                   </td>
-                  <td className="px-6 py-4">Coin chart</td>
+                  <td className="px-6 py-4">
+                    <Line
+                      data={{
+                        labels: Array.from(
+                          { length: coin.sparkline.length },
+                          (_, i) => (i + 1).toString()
+                        ),
+                        datasets: [
+                          {
+                            label: "Price ($)",
+                            data: coin.sparkline.map((str) =>
+                              parseFloat(str).toFixed(2)
+                            ),
+                          },
+                        ],
+                      }}
+                      options={{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                      }}
+                      style={{
+                        height: 25,
+                        width: 25,
+                      }}
+                    />
+                  </td>
                   <td className="px-6 py-4 text-center">
                     <a
                       href="#"
