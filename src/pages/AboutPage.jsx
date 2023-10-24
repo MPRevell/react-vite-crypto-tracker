@@ -32,29 +32,54 @@ const About = () => {
     setTimePeriodState(timePeriodState);
   };
 
+  const formatNumbers = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   /*
   To change time period => we use ?timePeriod=${timePeriod} // I want to set this to a button, so when users select a different time it re-renders and updates with the relevant info.
 
   I want 24hr (default) 7d, 30d, 3m, 1y, 3y - implement the logic to change this. Add functionality whereby if latest entry of data is higher than first entry => Green line : red line
   */
   return (
-    <div className="sss">
+    <div className="coin-details-page">
       {data ? (
         <>
-          <div className="flex flex-col p-4 h-screen justify-center items-center text-blue-900 dark:text-slate-200 bg-gray-100 dark:bg-gray-900">
-            {data.name}: ${parseFloat(data.price).toFixed(2)}
-            <h1 className="text-4xl font-bold text-blue-500 dark:text-blue-300 mb-2">
-              {data.name}
-            </h1>
-            <p className="text-left text-lg text-gray-400 dark:text-gray-200 mb-4">
-              {data.description}
-              check out their website at:{" "}
-              <a href={data.websiteUrl} target="blank">
+          <div className="coin-hero-wrapper mx-auto max-w-7xl py-6 px-2 sm:px-6 lg:px-8">
+            <div className="coin-hero flex items-start items-center">
+              <div className="logo-name-spacing space-x-2 flex items-start items-center">
                 {" "}
-                website
-              </a>
-            </p>
-            <div className="flex justify-center items-centerw-11/12 lg:w-3/4 xl:w-2/3 mb-6 bg-blue-200 dark:bg-gray-950 h-64 rounded-lg p-4">
+                <img
+                  src={data.iconUrl}
+                  alt="Logo"
+                  width="40"
+                  height="auto"
+                />{" "}
+                <p>
+                  {" "}
+                  <span className="text-xl font-bold">{data.name} </span>
+                  <span className="font-light text-xs">{data.symbol} </span>
+                </p>
+              </div>
+              <div className="price-change space-x-2 flex items-start items-baseline">
+                <p className="ml-20 font-bold text-xl">
+                  {" "}
+                  ${formatNumbers(parseFloat(data.price).toFixed(2))}
+                </p>
+                <span
+                  className={`text-xs font-medium ${
+                    parseFloat(data.change) > 0
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {parseFloat(data.change).toFixed(2)}%
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="coin-chart-container flex flex-col justify-center items-center ">
+            <div className="flex justify-center items-centerw-11/12 mb-6 bg-blue-200 dark:bg-gray-950 h-64 rounded-lg p-4">
               <Line
                 data={{
                   labels: Array.from(
@@ -75,18 +100,13 @@ const About = () => {
             {/* Time Period Buttons */}
             <div className="coin-chart-buttons border-solid rounded-md border-slate-900 border-2 border-radius-2 flex items-center p-2 space-x-4 mt-4">
               {" "}
-              {/* Added items-center and space-x-4 for spacing and alignment */}
               <span className="text-lg text-gray-600 dark:text-gray-400">
                 Time Period:
               </span>{" "}
-              {/* Label for the time periods */}
               {["1h", "12h", "24h", "7d", "30d", "1y"].map((timePeriod) => (
                 <button
                   key={timePeriod}
                   onClick={() => handleChangeTimePeriodState(timePeriod)}
-                  // Equivalent to above
-                  // onClick={() => setTimePeriodState(timePeriod)}
-
                   className={`px-4 py-2 text-white rounded-md hover:bg-blue-600 dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 ${
                     timePeriod === timePeriodState
                       ? "bg-blue-500 dark:bg-blue-700"
@@ -107,3 +127,73 @@ const About = () => {
 };
 
 export default About;
+
+// return (
+//   <div className="coin-details-page">
+//     {data ? (
+//       <>
+//         <div className="flex flex-col p-4 h-screen text-blue-900 dark:text-slate-200 bg-gray-100 dark:bg-gray-900">
+//           <div className="flex items-start items-center">
+//             <h1 className="text-4xl font-bold text-blue-500 dark:text-slate-300 mb-2">
+//               <img src={data.iconUrl} alt="Logo" width="40" height="auto" />{" "}
+//               {data.name} ${parseFloat(data.price).toFixed(2)}
+//             </h1>
+//           </div>
+
+//           <div className="coin-chart-container flex flex-col justify-center items-center ">
+//             <div className="flex justify-center items-centerw-11/12 mb-6 bg-blue-200 dark:bg-gray-950 h-64 rounded-lg p-4">
+//               <Line
+//                 data={{
+//                   labels: Array.from(
+//                     { length: data.sparkline.length },
+//                     (_, i) => (i + 1).toString()
+//                   ),
+//                   datasets: [
+//                     {
+//                       label: "Price ($)",
+//                       data: data.sparkline.map((str) =>
+//                         parseFloat(str).toFixed(2)
+//                       ),
+//                     },
+//                   ],
+//                 }}
+//               />
+//             </div>
+//             {/* Time Period Buttons */}
+//             <div className="coin-chart-buttons border-solid rounded-md border-slate-900 border-2 border-radius-2 flex items-center p-2 space-x-4 mt-4">
+//               {" "}
+//               <span className="text-lg text-gray-600 dark:text-gray-400">
+//                 Time Period:
+//               </span>{" "}
+//               {["1h", "12h", "24h", "7d", "30d", "1y"].map((timePeriod) => (
+//                 <button
+//                   key={timePeriod}
+//                   onClick={() => handleChangeTimePeriodState(timePeriod)}
+//                   className={`px-4 py-2 text-white rounded-md hover:bg-blue-600 dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 ${
+//                     timePeriod === timePeriodState
+//                       ? "bg-blue-500 dark:bg-blue-700"
+//                       : ""
+//                   }`}
+//                 >
+//                   {timePeriod}
+//                 </button>
+//               ))}
+//             </div>
+//           </div>
+//           <p className="text-left text-lg text-gray-400 dark:text-gray-200 mb-4">
+//             {data.description}. For further information checkout the{" "}
+//             <a href={data.websiteUrl} target="blank">
+//               {" "}
+//               website.
+//             </a>
+//           </p>
+//         </div>
+//       </>
+//     ) : (
+//       <div> Loading... </div>
+//     )}
+//   </div>
+// );
+// };
+
+// export default About;

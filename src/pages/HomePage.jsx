@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CoinTable from "../components/CoinTable";
-// import SearchParams from "../components/SearchParams";
+6;
 import Banner from "../components/Banner";
 
 const Home = () => {

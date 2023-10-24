@@ -10,7 +10,7 @@ function Banner({ searchTerm, setSearchTerm }) {
             </span>
           </h1>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <div className="flex w-full sm:w-auto gap-4">
+            <div className="flex w-full sm:w-auto gap-4 justify-center">
               <input
                 type="text"
                 placeholder="Search..."

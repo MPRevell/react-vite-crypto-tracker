@@ -8,15 +8,15 @@ const CoinTable = ({ data }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="overflow-x-auto px-8">
-        <div className="table-container">
+      <div className="overflow-x-auto">
+        <div className="table-container sm:px-4 md:px-16 rounded">
           <table className="w-full text-sm text-left bg-sky-500 text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-white-700  bg-gray-50 dark:bg-gray-950 dark:text-gray-200">
               <tr>
                 <th scope="col" className="px-6 py-3 text-center">
                   #
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-1 py-1">
                   Name
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -43,7 +43,7 @@ const CoinTable = ({ data }) => {
                     navigate(`/about/${coin.uuid}`);
                   }}
                   key={coin.uuid}
-                  className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+                  className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-slate-300 dark:hover:bg-gray-800"
                 >
                   <td className="text-center">{coin.rank}</td>
                   <th
