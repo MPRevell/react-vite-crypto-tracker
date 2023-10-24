@@ -12,7 +12,9 @@ const Home = () => {
     // Make the fetch request here!
 
     async function requestCoins() {
-      const res = await fetch(`https://api.coinranking.com/v2/coins`);
+      const res = await fetch(
+        `https://api.coinranking.com/v2/coins?timePeriod=7d`
+      );
       const json = await res.json();
       setData(json.data.coins);
       setFilteredData(json.data.coins);

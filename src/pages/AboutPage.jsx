@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart, registerables } from "chart.js";
+import Divider from "@mui/material/Divider";
 
 Chart.register(...registerables);
 Chart.register(CategoryScale);
@@ -44,7 +45,7 @@ const About = () => {
   return (
     <div className="coin-details-page">
       {data ? (
-        <div className="coin-details">
+        <div className="coin-details dark:bg-gray-900 bg-white ">
           <div className="coin-hero-wrapper mx-auto max-w-7xl py-6 px-2 sm:px-6 lg:px-8">
             <div className="coin-hero flex items-start items-center">
               <div className="logo-name-spacing space-x-2 flex items-start items-center">
@@ -78,10 +79,11 @@ const About = () => {
               </div>
             </div>
           </div>
+          <Divider className="bg-slate-800" />
           <div className="coin-desc text-left flex-start mx-auto max-w-7xl py-6 px-2 sm:px-6 lg:px-8 text-sm/[17px]">
             <p>
               <span className="font-bold">Summary</span> by AI:{" "}
-              {data.description} For more information check the official{" "}
+              {data.description} For more information, check out the official{" "}
               <a href={data.websiteUrl} target="blank">
                 {" "}
                 website.
@@ -89,7 +91,7 @@ const About = () => {
             </p>
           </div>
           <div className="coin-chart-container flex flex-col items-center px-2 py-6">
-            <div className="w-full mb-6 p-4 bg-blue-200 dark:bg-gray-950 rounded-lg">
+            <div className="w-full mx-auto max-w-7xl py-6 px-2 sm:px-6 lg:px-8dark:bg-gray-950 rounded-lg">
               <Line
                 data={{
                   labels: Array.from(
@@ -108,6 +110,9 @@ const About = () => {
                 options={{
                   responsive: true,
                   maintainAspectRatio: false,
+                }}
+                style={{
+                  height: 275,
                 }}
               />
             </div>
@@ -130,6 +135,11 @@ const About = () => {
                 </button>
               ))}
             </div>
+          </div>
+          <div className="coin-stats text-left flex-start mx-auto max-w-7xl py-4 px-2 sm:px-6 lg:px-8">
+            <h4 className="coin-stats-title font-bold text-l">
+              Value statistics:
+            </h4>
           </div>
         </div>
       ) : (

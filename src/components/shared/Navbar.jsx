@@ -1,6 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import { useState } from "react";
-import { IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
+import { IconMoonFilled, IconSunFilled, IconMoon } from "@tabler/icons-react";
 
 function Navbar() {
   const [theme, setTheme] = useState("dark");
@@ -101,9 +101,9 @@ function Navbar() {
               >
                 <span className="absolute -inset-1.5" />
                 {theme === "dark" ? (
-                  <IconSunFilled size={18} className="text-orange-500" />
+                  <IconMoon size={18} className="text-slate-500" />
                 ) : (
-                  <IconMoonFilled size={18} className="text-slate-400" />
+                  <IconMoonFilled size={18} className="text-slate-500" />
                 )}
               </button>
               {/* Profile dropdown */}

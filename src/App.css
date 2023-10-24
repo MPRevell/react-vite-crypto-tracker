@@ -95,3 +95,7 @@ nav ul {
   align-content: center;
   gap: 8px;
 }
+
+.coin-details-page {
+  border-bottom: #61dafbaa;
+}
