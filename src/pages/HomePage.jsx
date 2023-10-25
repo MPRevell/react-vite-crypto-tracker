@@ -7,13 +7,21 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]); // This will hold all data
   const [filteredData, setFilteredData] = useState([]); // This will be set with the filtered data from search.
+  // const [currency, setCurrency] = useState([]);
 
   useEffect(() => {
     // Make the fetch request here!
+    // ?referenceCurrencyUuid=${currency}
 
     async function requestCoins() {
       const res = await fetch(
-        `https://api.coinranking.com/v2/coins?timePeriod=7d`
+        `https://api.coinranking.com/v2/coins?timePeriod=7d`,
+        {
+          headers: {
+            "x-access-token": `${import.meta.env.VITE_COINRANKING_APIKEY}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
       const json = await res.json();
       setData(json.data.coins);

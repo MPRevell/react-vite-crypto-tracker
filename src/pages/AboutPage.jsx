@@ -12,10 +12,19 @@ import {
   IconDropletFilled,
   IconDropletHalf2Filled,
   IconDropletHalf2,
+  IconPercentage,
 } from "@tabler/icons-react";
 
 Chart.register(...registerables);
 Chart.register(CategoryScale);
+
+const formatNumbers = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+const volMarketCap = (a, b) => {
+  return (a / b).toFixed(2);
+};
 
 const About = () => {
   const { coin } = useParams();
@@ -29,7 +38,13 @@ const About = () => {
 
     async function requestCoinDetails() {
       const res = await fetch(
-        `https://api.coinranking.com/v2/coin/${coin}?timePeriod=${timePeriodState}`
+        `https://api.coinranking.com/v2/coin/${coin}?timePeriod=${timePeriodState}`,
+        {
+          headers: {
+            "x-access-token": `${import.meta.env.VITE_COINRANKING_APIKEY}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
       const json = await res.json();
       console.log("json", json);
@@ -40,14 +55,6 @@ const About = () => {
 
   const handleChangeTimePeriodState = (timePeriodState) => {
     setTimePeriodState(timePeriodState);
-  };
-
-  const formatNumbers = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
-  const volMarketCap = (a, b) => {
-    return (a / b).toFixed(2);
   };
 
   return (
@@ -160,6 +167,15 @@ const About = () => {
                 <p className="text-sm text-gray-400">Price</p>
                 <p className="font-bold text-l">
                   £{formatNumbers(parseFloat(data.price).toFixed(2))}
+                </p>
+              </div>
+              <div>
+                <IconPercentage />
+                <p className="text-sm text-gray-400">
+                  Price change for time period
+                </p>
+                <p className="font-bold text-l">
+                  {parseFloat(data.change).toFixed(2)}%
                 </p>
               </div>
               <div>

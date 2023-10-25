@@ -10,7 +10,6 @@ import Test from "./pages/TestPage";
 import About from "./pages/AboutPage";
 import Navbar from "./components/shared/Navbar";
 
-import SearchParams from "./components/SearchParams";
 import "./App.css";
 
 const router = createBrowserRouter(
@@ -18,7 +17,6 @@ const router = createBrowserRouter(
     <Route path="/" element={<Navbar />}>
       <Route index element={<Home />} />
       <Route path="/about/:coin" element={<About />} />
-      <Route path="/" element={<SearchParams />} />
       <Route path="/test" element={<Test />} />
     </Route>
   )

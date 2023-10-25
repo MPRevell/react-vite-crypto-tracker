@@ -86,6 +86,7 @@ const CoinTable = ({ data }) => {
                   </td>
                   <td className="px-6 py-4">
                     <Line
+                      className="flex items-center"
                       data={{
                         labels: Array.from(
                           { length: coin.sparkline.length },
@@ -93,10 +94,17 @@ const CoinTable = ({ data }) => {
                         ),
                         datasets: [
                           {
-                            label: "Price ($)",
                             data: coin.sparkline.map((str) =>
                               parseFloat(str).toFixed(2)
                             ),
+                            legend: {
+                              display: false,
+                            },
+                            fill: false,
+                            pointRadius: 0,
+                            lineTension: 0.5,
+                            borderColor: "#00FF5F",
+                            borderWidth: 3,
                           },
                         ],
                       }}
@@ -123,9 +131,12 @@ const CoinTable = ({ data }) => {
                         },
                         responsive: true,
                         maintainAspectRatio: false,
+                        title: {
+                          display: false,
+                        },
                       }}
                       style={{
-                        height: 60,
+                        height: 80,
                         width: 120,
                         color: "#FE1040",
                       }}
