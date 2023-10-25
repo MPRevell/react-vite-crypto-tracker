@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart, registerables } from "chart.js";
+import { useTable, useSortBy, usePagination } from "@tanstack/react-table";
 
 Chart.register(...registerables);
 Chart.register(CategoryScale);
