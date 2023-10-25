@@ -1,6 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import { useState } from "react";
-import { IconMoonFilled, IconSunFilled, IconMoon } from "@tabler/icons-react";
+import { IconMoonFilled, IconMoon } from "@tabler/icons-react";
 
 function Navbar() {
   const [theme, setTheme] = useState("dark");

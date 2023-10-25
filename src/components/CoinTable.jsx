@@ -101,12 +101,33 @@ const CoinTable = ({ data }) => {
                         ],
                       }}
                       options={{
+                        scales: {
+                          x: {
+                            display: false,
+                            grid: {
+                              display: false,
+                            },
+                            ticks: {
+                              display: false,
+                            },
+                          },
+                          y: {
+                            display: false,
+                            grid: {
+                              display: false,
+                            },
+                            ticks: {
+                              display: false,
+                            },
+                          },
+                        },
                         responsive: true,
                         maintainAspectRatio: false,
                       }}
                       style={{
-                        height: 25,
-                        width: 25,
+                        height: 60,
+                        width: 120,
+                        color: "#FE1040",
                       }}
                     />
                   </td>

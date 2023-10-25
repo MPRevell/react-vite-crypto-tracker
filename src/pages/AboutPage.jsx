@@ -50,11 +50,6 @@ const About = () => {
     return (a / b).toFixed(2);
   };
 
-  /*
-  To change time period => we use ?timePeriod=${timePeriod} // I want to set this to a button, so when users select a different time it re-renders and updates with the relevant info.
-
-  I want 24hr (default) 7d, 30d, 3m, 1y, 3y - implement the logic to change this. Add functionality whereby if latest entry of data is higher than first entry => Green line : red line
-  */
   return (
     <div className="coin-details-page">
       {data ? (
@@ -153,7 +148,7 @@ const About = () => {
             <h3 className="coin-stats-title font-bold text-l">
               Value statistics:
             </h3>
-            <div className="grid grid-cols-3 gap-4 mt-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 sm:grid-cols-2 gap-4 mt-4">
               <div>
                 <IconTrophy />
                 <p className="text-sm text-gray-400">Rank</p>
