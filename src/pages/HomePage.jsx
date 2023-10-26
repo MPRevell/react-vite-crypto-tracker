@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import CoinTable from "../components/CoinTable";
+import Table from "../components/CoinTable";
+
 6;
 import Banner from "../components/Banner";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState([]); // This will hold all data
-  const [filteredData, setFilteredData] = useState([]); // This will be set with the filtered data from search.
+  const [data, setData] = useState([]); // Hold the data here
+  const [filteredData, setFilteredData] = useState([]); // Filtering the data from the search input
   // const [currency, setCurrency] = useState([]);
 
   useEffect(() => {
-    // Make the fetch request here!
-    // ?referenceCurrencyUuid=${currency}
+    // ?referenceCurrencyUuid=${currency} USE this when building currency change button (this is the query required).
 
     async function requestCoins() {
       const res = await fetch(
@@ -46,7 +46,7 @@ const Home = () => {
     <div className="home-container">
       <Banner searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className="coin-table">
-        <CoinTable data={filteredData} />
+        <Table data={filteredData} />
       </div>
     </div>
   );

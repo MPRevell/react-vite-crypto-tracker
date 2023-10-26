@@ -119,7 +119,7 @@ function Navbar() {
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
                     <img
-                      className="h-8 w-8 rounded-full"
+                      className="h-5 w-5 rounded-full"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Profile Avatar"
                     />

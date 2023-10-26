@@ -81,8 +81,6 @@ nav ul {
 
 .table-container {
   overflow: hidden;
-  border: 1px black none;
-  border-radius: 5px;
   display: flex;
   flex-flow: flex-wrap;
   justify-content: space-between;
