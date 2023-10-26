@@ -1,8 +1,9 @@
-# React + Vite
+# Cryptocurrency Dashboard App built with ReactJS + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Description:
+This app allows users to view and research the latest cryptocurrency price action - adding desired coins to their watchlist.
 
-Currently, two official plugins are available:
+Tech Stack: ReactJS, Javascript, HTML, CSS, TailwindCSS, MUI, Vite, Firebase, HyperUI, ChartJs, Tanstack, Git
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
