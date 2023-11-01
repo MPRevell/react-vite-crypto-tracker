@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase.config";
 
 export default function Signin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-
-  const auth = getAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
