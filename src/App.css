@@ -113,3 +113,9 @@ input,
 .login-button {
   margin: 5px 0px;
 }
+
+#signin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

@@ -1,12 +1,290 @@
-import { Outlet, Link } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { IconMoonFilled, IconMoon } from "@tabler/icons-react";
+import Button from "@mui/material/Button";
+import GoogleIcon from "@mui/icons-material/Google";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import {
+  signOut,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import Dialog from "@mui/material/Dialog";
+import Typography from "@mui/material/Typography";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import { auth, Providers } from "../../firebase.config";
+
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <div id="signin-container">{children}</div>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function AuthDialog(props) {
+  const { onClose, open } = props;
+
+  const [activeTab, setActiveTab] = React.useState(0);
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [disabled, setDisabled] = useState(false);
+
+  const [formSignIn, setFormSignIn] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [formSignUp, setFormSignUp] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleInputSignInChange = (e) => {
+    setFormSignIn({
+      ...formSignIn,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleInputSignUpChange = (e) => {
+    setFormSignUp({
+      ...formSignUp,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const signInWithPassword = () => {
+    setDisabled(true);
+    signInWithEmailAndPassword(auth, formSignIn.username, formSignIn.password)
+      .then((userCredential) => {
+        // Signed in
+        setDisabled(false);
+        setErrorMessage("");
+        onClose();
+      })
+      .catch((error) => {
+        setErrorMessage(error.code + ": " + error.message);
+        console.log("error", error);
+        setDisabled(false);
+      });
+  };
+
+  const signUpWithPassword = () => {
+    if (formSignUp.password !== formSignUp.confirmPassword) {
+      return setErrorMessage("The two passwords do not match!");
+    }
+
+    setDisabled(true);
+    createUserWithEmailAndPassword(
+      auth,
+      formSignUp.username,
+      formSignUp.password
+    )
+      .then((userCredential) => {
+        // Signed up
+        setDisabled(false);
+        setErrorMessage("");
+        onClose();
+      })
+      .catch((error) => {
+        setErrorMessage(error.code + ": " + error.message);
+        setDisabled(false);
+      });
+  };
+
+  const handleChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
+
+  const handleClose = () => {
+    onClose();
+  };
+
+  const signInWithGoogle = () => {
+    setDisabled(true);
+    signInWithPopup(auth, Providers.google)
+      .then(() => {
+        setDisabled(false);
+        // navigate("/");
+        handleClose();
+      })
+      .catch((error) => {
+        setErrorMessage(error.code + ": " + error.message);
+        setDisabled(false);
+      });
+  };
+
+  return (
+    <Dialog onClose={handleClose} open={open}>
+      <Box sx={{ width: "100%" }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs
+            value={activeTab}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
+            <Tab label="Sign in" />
+            <Tab label="Sign up" />
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={activeTab} index={0}>
+          <Button
+            onClick={signInWithGoogle}
+            variant="outlined"
+            startIcon={<GoogleIcon />}
+            disabled={disabled}
+          >
+            Sign in with Google
+          </Button>
+
+          <hr />
+
+          <TextField
+            name="username"
+            onChange={handleInputSignInChange}
+            value={formSignIn.username}
+            id="username-login"
+            label="Username"
+            variant="outlined"
+          />
+          <TextField
+            name="password"
+            onChange={handleInputSignInChange}
+            type="password"
+            value={formSignIn.password}
+            id="password-login"
+            label="Password"
+            variant="outlined"
+          />
+
+          <Button
+            onClick={signInWithPassword}
+            disabled={disabled}
+            variant="outlined"
+            color="secondary"
+          >
+            Sign in with credentials
+          </Button>
+
+          <hr />
+
+          <p className="text-red-500">{errorMessage}</p>
+        </CustomTabPanel>
+
+        <CustomTabPanel value={activeTab} index={1}>
+          <Button
+            onClick={signInWithGoogle}
+            variant="outlined"
+            startIcon={<GoogleIcon />}
+            disabled={disabled}
+          >
+            Sign up with Google
+          </Button>
+
+          <hr />
+
+          <TextField
+            name="username"
+            onChange={handleInputSignUpChange}
+            value={formSignUp.username}
+            id="username-login"
+            label="Username"
+            variant="outlined"
+          />
+          <TextField
+            name="password"
+            onChange={handleInputSignUpChange}
+            type="password"
+            value={formSignUp.password}
+            id="password-login"
+            label="Password"
+            variant="outlined"
+          />
+
+          <TextField
+            name="confirmPassword"
+            onChange={handleInputSignUpChange}
+            type="password"
+            value={formSignUp.confirmPassword}
+            id="confirmpassword-login"
+            label="Confirm Password"
+            variant="outlined"
+          />
+
+          <Button
+            onClick={signUpWithPassword}
+            disabled={disabled}
+            variant="outlined"
+            color="secondary"
+          >
+            Sign up with credentials
+          </Button>
+
+          <hr />
+
+          <p className="text-red-500">{errorMessage}</p>
+        </CustomTabPanel>
+      </Box>
+    </Dialog>
+  );
+}
 
 function Navbar() {
+  const navigate = useNavigate();
   const [theme, setTheme] = useState("dark");
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setOpen(false);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSignout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <div id="app-container" className={theme}>
+      <AuthDialog open={open} onClose={handleModalClose} />
+
       <nav className="dark:bg-gray-950 bg-white">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
@@ -96,12 +374,12 @@ function Navbar() {
                   >
                     Sign Up
                   </Link>
-                  <Link
-                    to="/signin"
+                  <span
+                    onClick={handleModalOpen}
                     className="dark:text-gray-300 text-slate-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     Sign In
-                  </Link>
+                  </span>
                 </div>
               </div>
             </div>
@@ -127,6 +405,7 @@ function Navbar() {
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
+                    onClick={handleMenu}
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
@@ -136,6 +415,31 @@ function Navbar() {
                       alt="Profile Avatar"
                     />
                   </button>
+
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorEl)}
+                    onClose={handleMenuClose}
+                  >
+                    {auth.currentUser ? (
+                      <MenuItem onClick={handleSignout}>Sign out</MenuItem>
+                    ) : (
+                      <>
+                        <MenuItem onClick={handleModalOpen}>Sign in</MenuItem>
+                        <MenuItem onClick={handleModalOpen}>Sign up</MenuItem>
+                      </>
+                    )}
+                  </Menu>
                 </div>
               </div>
             </div>
