@@ -239,30 +239,30 @@ const Table = ({ data, columns }) => {
             </tbody>
           </table>
           <div className="coin-table-pagination-wrapper bottom-0 left-0 right-0 px-4 py-4 dark:text-white text-gray-700 bg-white dark:bg-gray-900">
-            <div className="flex justify-center items-center gap-2 bg-white">
+            <div className="flex justify-center items-center gap-2 dark:dg-gray-950">
               <button
-                className="border rounded-full px-3 py-1 hover:bg-gray-100 transition-all"
+                className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
                 onClick={() => table.setPageIndex(0)}
                 disabled={!table.getCanPreviousPage()}
               >
                 {"<<"}
               </button>
               <button
-                className="border rounded-full px-3 py-1 hover:bg-gray-100 transition-all"
+                className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
                 onClick={() => table.previousPage()}
                 disabled={!table.getCanPreviousPage()}
               >
                 {"<"}
               </button>
               <button
-                className="border rounded-full px-3 py-1 hover:bg-gray-100 transition-all"
+                className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
                 onClick={() => table.nextPage()}
                 disabled={!table.getCanNextPage()}
               >
                 {">"}
               </button>
               <button
-                className="border rounded-full px-3 py-1 hover:bg-gray-100 transition-all"
+                className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
                 onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                 disabled={!table.getCanNextPage()}
               >

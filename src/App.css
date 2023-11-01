@@ -97,3 +97,19 @@ nav ul {
 .coin-details-page {
   border-bottom: #61dafbaa;
 }
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-button,
+.login-button {
+  cursor: pointer;
+}
+
+input,
+.signup-button,
+.login-button {
+  margin: 5px 0px;
+}
