@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import GoogleIcon from "@mui/icons-material/Google";
 import TextField from "@mui/material/TextField";
@@ -15,8 +15,6 @@ import { auth, Providers } from "../../firebase.config";
 import CustomTabPanel from "./CustomTabPanel";
 
 export default function AuthDialog(props) {
-  const [passwordMatch, setMatch] = useState(null);
-
   const { onClose, open } = props;
 
   const [activeTab, setActiveTab] = React.useState(0);
@@ -34,6 +32,17 @@ export default function AuthDialog(props) {
     password: "",
     confirmPassword: "",
   });
+
+  useEffect(() => {
+    if (
+      formSignUp.confirmPassword !== "" &&
+      formSignUp.password !== formSignUp.confirmPassword
+    ) {
+      setErrorMessage("Password does not match");
+    } else {
+      setErrorMessage("");
+    }
+  }, [formSignUp.password, formSignUp.confirmPassword]);
 
   const handleInputSignInChange = (e) => {
     setFormSignIn({
@@ -164,7 +173,7 @@ export default function AuthDialog(props) {
 
           <hr />
 
-          <p className="text-red-500">{errorMessage}</p>
+          <p className="text-red-400">{errorMessage}</p>
         </CustomTabPanel>
 
         <CustomTabPanel value={activeTab} index={1}>

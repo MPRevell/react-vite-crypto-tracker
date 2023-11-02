@@ -13,7 +13,7 @@ const routes = [
   },
 
   {
-    path: "/about",
+    path: "/about/:coin",
     component: About,
     name: "About Page",
     protected: false,

@@ -6,6 +6,10 @@ import Menu from "@mui/material/Menu";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import AuthDialog from "./AuthDialog";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -118,7 +122,7 @@ function Navbar() {
                     href="#"
                     className="dark:text-gray-300 text-slate-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
-                    Portfolio
+                    Watchlist
                   </a>
 
                   <Link
@@ -127,18 +131,6 @@ function Navbar() {
                   >
                     Test
                   </Link>
-                  <Link
-                    to="/signup"
-                    className="dark:text-gray-300 text-slate-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Sign Up
-                  </Link>
-                  <span
-                    onClick={handleModalOpen}
-                    className="dark:text-gray-300 text-slate-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Sign In
-                  </span>
                 </div>
               </div>
             </div>
@@ -191,12 +183,21 @@ function Navbar() {
                     onClose={handleMenuClose}
                   >
                     {auth.currentUser ? (
-                      <MenuItem onClick={handleSignout}>Sign out</MenuItem>
+                      <MenuItem className="space-x-4" onClick={handleSignout}>
+                        Sign out
+                        <LogoutIcon />
+                      </MenuItem>
                     ) : (
-                      <>
-                        <MenuItem onClick={handleModalOpen}>Sign in</MenuItem>
-                        <MenuItem onClick={handleModalOpen}>Sign up</MenuItem>
-                      </>
+                      <div>
+                        <MenuItem onClick={handleModalOpen}>
+                          <LoginIcon />
+                          Sign in
+                        </MenuItem>
+                        <MenuItem onClick={handleModalOpen}>
+                          <FontAwesomeIcon icon={faUserPlus} />
+                          Sign up
+                        </MenuItem>
+                      </div>
                     )}
                   </Menu>
                 </div>
@@ -214,7 +215,7 @@ function Navbar() {
               href="#"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
-              Portfolio
+              Watchlist
             </a>
           </div>
         </div>
