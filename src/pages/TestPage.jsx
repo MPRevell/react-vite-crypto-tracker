@@ -40,14 +40,17 @@ export default function TestPage() {
       );
       const coinsData = response.data.data.coins;
       setAllCoins(coinsData);
+      console.log(coinsData);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getAllSubscriptions();
-    fetchAllCoins();
+    if (auth.currentUser) {
+      getAllSubscriptions();
+      fetchAllCoins();
+    }
   }, []);
 
   return (
@@ -57,7 +60,7 @@ export default function TestPage() {
           <div>
             {watchedCoins.map((subscription) => {
               const filteredCoins = allCoins.filter((coin) =>
-                subscription.coins.includes(coin.id)
+                subscription.coins.includes(coin.uuid)
               );
 
               return (
@@ -65,7 +68,7 @@ export default function TestPage() {
                   <h3>User ID: {subscription.userId}</h3>
                   <ul>
                     {filteredCoins.map((coin) => (
-                      <li key={coin.id}>{coin.name}</li>
+                      <li key={coin.uuid}>{coin.name}</li>
                     ))}
                   </ul>
                 </div>
