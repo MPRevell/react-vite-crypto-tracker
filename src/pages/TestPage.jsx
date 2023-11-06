@@ -1,13 +1,22 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, auth } from "../firebase.config";
+import axios from "axios";
+import { where } from "firebase/firestore";
 
 export default function TestPage() {
   const [watchedCoins, setWatchedCoins] = useState([]);
+  const [allCoins, setAllCoins] = useState([]);
 
   console.log("auth", auth.currentUser);
+
   const getAllSubscriptions = async () => {
-    const querySnapshot = await getDocs(collection(db, "subscriptions"));
+    const currentUserId = auth.currentUser?.uid;
+
+    // Filter subscriptions based on current user ID
+    const subscriptionsRef = collection(db, "subscriptions");
+    const q = query(subscriptionsRef, where("userId", "==", currentUserId));
+    const querySnapshot = await getDocs(q);
 
     const subscriptions = querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -18,30 +27,55 @@ export default function TestPage() {
     setWatchedCoins(subscriptions);
   };
 
+  const fetchAllCoins = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.coinranking.com/v2/coins?timePeriod=7d`,
+        {
+          headers: {
+            "x-access-token": `${import.meta.env.VITE_COINRANKING_APIKEY}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const coinsData = response.data.data.coins;
+      setAllCoins(coinsData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getAllSubscriptions();
+    fetchAllCoins();
   }, []);
-
-  auth.currentUser;
 
   return (
     <>
-      <div>
+      {auth.currentUser ? (
         <div>
-          {watchedCoins.map((subscription) => (
-            <div key={subscription.id}>
-              <h3>User ID: {subscription.userId}</h3>
-              <ul>
-                {subscription.coins.map((coinId, index) => (
-                  <li key={index}>{coinId}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            {watchedCoins.map((subscription) => {
+              const filteredCoins = allCoins.filter((coin) =>
+                subscription.coins.includes(coin.id)
+              );
+
+              return (
+                <div key={subscription.id}>
+                  <h3>User ID: {subscription.userId}</h3>
+                  <ul>
+                    {filteredCoins.map((coin) => (
+                      <li key={coin.id}>{coin.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
         </div>
-        You can only see this text if you are logged in (feel free to check by
-        clicking avatar in the top right to sign-out)
-      </div>
+      ) : (
+        <div>Please log in to view your watchlist.</div>
+      )}
     </>
   );
 }

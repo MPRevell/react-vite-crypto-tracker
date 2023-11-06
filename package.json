@@ -21,6 +21,7 @@
     "@mui/material": "^5.14.13",
     "@tabler/icons-react": "^2.39.0",
     "@tanstack/react-table": "^8.10.7",
+    "axios": "^1.6.0",
     "chart.js": "^4.4.0",
     "firebase": "^10.5.0",
     "react": "^18.2.0",
