@@ -161,4 +161,32 @@ const CoinTable = ({ data }) => {
   );
 };
 
+// const [allCoins, setAllCoins] = useState([]);
+
+// const fetchAllCoins = async () => {
+//   try {
+//     const response = await axios.get(
+//       `https://api.coinranking.com/v2/coins?timePeriod=7d`,
+//       {
+//         headers: {
+//           "x-access-token": `${import.meta.env.VITE_COINRANKING_APIKEY}`,
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+//     const coinsData = response.data.data.coins;
+//     setAllCoins(coinsData);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+// useEffect(() => {
+//   if (auth.currentUser) {
+//     allCoins;
+//     watchedCoins;
+//     console.log("use effect watched coins", watchedCoins);
+//   }
+// }, [watchedCoins, allCoins]);
+
 export default CoinTable;
