@@ -251,75 +251,77 @@ const Table = ({ data, columns }) => {
               ))}
             </tbody>
           </table>
-          <div className="coin-table-pagination-wrapper bottom-0 left-0 right-0 px-4 py-4 dark:text-white text-gray-700 bg-white dark:bg-gray-900">
-            <div className="flex justify-center items-center gap-2 dark:dg-gray-950">
-              <button
-                className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
-                onClick={() => table.setPageIndex(0)}
-                disabled={!table.getCanPreviousPage()}
-              >
-                {"<<"}
-              </button>
-              <button
-                className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-              >
-                {"<"}
-              </button>
-              <button
-                className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-              >
-                {">"}
-              </button>
-              <button
-                className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
-                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                disabled={!table.getCanNextPage()}
-              >
-                {">>"}
-              </button>
-              <span className="flex items-center gap-1">
-                <div>Page</div>
-                <strong>
-                  {table.getState().pagination.pageIndex + 1} of{" "}
-                  {table.getPageCount()}
-                </strong>
-              </span>
-              <span className="flex items-center gap-1">
-                | Go to page:
-                <input
-                  type="number"
-                  defaultValue={table.getState().pagination.pageIndex + 1}
+          {data.length >= 10 && (
+            <div className="coin-table-pagination-wrapper bottom-0 left-0 right-0 px-4 py-4 dark:text-white text-gray-700 bg-white dark:bg-gray-900">
+              <div className="flex justify-center items-center gap-2 dark:dg-gray-950">
+                <button
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
+                  onClick={() => table.setPageIndex(0)}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  {"<<"}
+                </button>
+                <button
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
+                >
+                  {"<"}
+                </button>
+                <button
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                >
+                  {">"}
+                </button>
+                <button
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
+                  onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                  disabled={!table.getCanNextPage()}
+                >
+                  {">>"}
+                </button>
+                <span className="flex items-center gap-1">
+                  <div>Page</div>
+                  <strong>
+                    {table.getState().pagination.pageIndex + 1} of{" "}
+                    {table.getPageCount()}
+                  </strong>
+                </span>
+                <span className="flex items-center gap-1">
+                  | Go to page:
+                  <input
+                    type="number"
+                    defaultValue={table.getState().pagination.pageIndex + 1}
+                    onChange={(e) => {
+                      const page = e.target.value
+                        ? Number(e.target.value) - 1
+                        : 0;
+                      table.setPageIndex(page);
+                    }}
+                    className="border p-1 rounded w-16"
+                  />
+                </span>
+                <select
+                  value={table.getState().pagination.pageSize}
                   onChange={(e) => {
-                    const page = e.target.value
-                      ? Number(e.target.value) - 1
-                      : 0;
-                    table.setPageIndex(page);
+                    table.setPageSize(Number(e.target.value));
                   }}
-                  className="border p-1 rounded w-16"
-                />
-              </span>
-              <select
-                value={table.getState().pagination.pageSize}
-                onChange={(e) => {
-                  table.setPageSize(Number(e.target.value));
-                }}
-                className="border rounded p-1"
-              >
-                {[10, 20, 30, 40, 50].map((pageSize) => (
-                  <option key={pageSize} value={pageSize}>
-                    Show {pageSize}
-                  </option>
-                ))}
-              </select>
+                  className="border rounded p-1"
+                >
+                  {[10, 20, 30, 40, 50].map((pageSize) => (
+                    <option key={pageSize} value={pageSize}>
+                      Show {pageSize}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="text-center">
+                {table.getRowModel().rows.length} Rows
+              </div>
             </div>
-            <div className="text-center">
-              {table.getRowModel().rows.length} Rows
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </>

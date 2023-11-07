@@ -169,7 +169,7 @@ const About = () => {
                   Price
                 </p>
                 <p className="font-bold text-l text-gray-900 dark:text-white">
-                  £{formatNumbers(parseFloat(data.price).toFixed(2))}
+                  ${formatNumbers(parseFloat(data.price).toFixed(2))}
                 </p>
               </div>
 
@@ -189,7 +189,7 @@ const About = () => {
                   24h volume
                 </p>
                 <p className="font-bold text-l text-gray-900 dark:text-white">
-                  £{formatNumbers(parseFloat(data["24hVolume"]).toFixed(2))}
+                  ${formatNumbers(parseFloat(data["24hVolume"]).toFixed(2))}
                 </p>
               </div>
 
@@ -199,7 +199,7 @@ const About = () => {
                   Market cap
                 </p>
                 <p className="font-bold text-l text-gray-900 dark:text-white">
-                  £{formatNumbers(parseFloat(data.marketCap).toFixed(2))}
+                  ${formatNumbers(parseFloat(data.marketCap).toFixed(2))}
                 </p>
               </div>
 
@@ -225,7 +225,7 @@ const About = () => {
                   Fully diluted market cap
                 </p>
                 <p className="font-bold text-l text-gray-900 dark:text-white">
-                  £
+                  $
                   {formatNumbers(
                     parseFloat(data.fullyDilutedMarketCap).toFixed(2)
                   )}
