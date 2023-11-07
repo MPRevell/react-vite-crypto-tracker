@@ -1,31 +1,14 @@
 import { collection, getDocs, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { db, auth } from "../firebase.config";
 import axios from "axios";
 import { where } from "firebase/firestore";
+import Table from "../components/CoinTable";
+import SubscriptionContext from "../contexts/SubscriptionContext";
 
 export default function TestPage() {
-  const [watchedCoins, setWatchedCoins] = useState([]);
+  const { watchedCoins } = useContext(SubscriptionContext);
   const [allCoins, setAllCoins] = useState([]);
-
-  console.log("auth", auth.currentUser);
-
-  const getAllSubscriptions = async () => {
-    const currentUserId = auth.currentUser?.uid;
-
-    // Filter subscriptions based on current user ID
-    const subscriptionsRef = collection(db, "subscriptions");
-    const q = query(subscriptionsRef, where("userId", "==", currentUserId));
-    const querySnapshot = await getDocs(q);
-
-    const subscriptions = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    console.log("All Subscriptions", subscriptions);
-    setWatchedCoins(subscriptions);
-  };
 
   const fetchAllCoins = async () => {
     try {
@@ -48,7 +31,6 @@ export default function TestPage() {
 
   useEffect(() => {
     if (auth.currentUser) {
-      getAllSubscriptions();
       fetchAllCoins();
     }
   }, []);
@@ -65,12 +47,9 @@ export default function TestPage() {
 
               return (
                 <div key={subscription.id}>
-                  <h3>User ID: {subscription.userId}</h3>
-                  <ul>
-                    {filteredCoins.map((coin) => (
-                      <li key={coin.uuid}>{coin.name}</li>
-                    ))}
-                  </ul>
+                  <div className="coin-table">
+                    <Table data={filteredCoins} />
+                  </div>
                 </div>
               );
             })}

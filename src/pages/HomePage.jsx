@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Table from "../components/CoinTable";
 
 6;
 import Banner from "../components/Banner";
+import SubscriptionContext from "../contexts/SubscriptionContext";
 
 const Home = () => {
+  const { watchedCoins } = useContext(SubscriptionContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]); // Hold the data here
   const [filteredData, setFilteredData] = useState([]); // Filtering the data from the search input
