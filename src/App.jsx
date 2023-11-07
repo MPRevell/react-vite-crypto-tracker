@@ -57,7 +57,7 @@ function App() {
     }));
 
     console.log("All Subscriptions", subscriptions);
-    setWatchedCoins(subscriptions);
+    setWatchedCoins(subscriptions[0].coins);
   };
 
   useEffect(() => {

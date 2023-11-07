@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart, registerables } from "chart.js";
@@ -10,10 +10,14 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 
+import SubscriptionContext from "../contexts/SubscriptionContext";
+
 Chart.register(...registerables);
 Chart.register(CategoryScale);
 
 function CoinTable({ data }) {
+  const { watchedCoins } = useContext(SubscriptionContext);
+  console.log("watchedCoins:", watchedCoins);
   const formatNumbers = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -132,17 +136,22 @@ function CoinTable({ data }) {
       {
         header: "Add to watchlist",
         accessorKey: "watchlist",
-        cell: (info) => (
-          <a
-            href="#"
-            className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-          >
-            Add
-          </a>
-        ),
+        cell: (info) => {
+          const watchedCoin = watchedCoins.includes(info.row.original.uuid);
+          return (
+            <a
+              href="#"
+              className={`inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700 ${
+                watchedCoin ? "bg-yellow-200" : ""
+              }`}
+            >
+              {watchedCoin ? "Remove" : "Add"}
+            </a>
+          );
+        },
       },
     ],
-    []
+    [watchedCoins]
   );
 
   return (
