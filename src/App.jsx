@@ -6,7 +6,15 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  arrayUnion,
+  arrayRemove,
+  updateDoc,
+  setDoc,
+  getDoc,
+  doc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db, auth } from "./firebase.config";
 import Navbar from "./components/shared/Navbar";
 import AuthChecker from "./components/AuthChecker";
@@ -67,18 +75,21 @@ function App() {
   const getAllSubscriptions = async () => {
     const currentUserId = auth.currentUser?.uid;
 
-    // Filter subscriptions based on current user ID
-    const subscriptionsRef = collection(db, "subscriptions");
-    const q = query(subscriptionsRef, where("userId", "==", currentUserId));
-    const querySnapshot = await getDocs(q);
+    // Directly query the subscription document using the current user ID
+    const userRef = doc(db, "subscriptions", currentUserId);
+    const userDoc = await getDoc(userRef);
 
-    const subscriptions = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    console.log("All Subscriptions", subscriptions);
-    setWatchedCoins(subscriptions[0].coins);
+    if (userDoc.exists()) {
+      setWatchedCoins(userDoc.data().coins);
+    } else {
+      // Create a new watchlist document.
+      await setDoc(userRef, {
+        coins: [],
+        updatedTime: serverTimestamp(),
+        createdTime: serverTimestamp(),
+        userId: auth.currentUser?.uid,
+      });
+    }
   };
 
   useEffect(() => {
@@ -95,9 +106,31 @@ function App() {
     });
   }, []);
 
+  // Adding or Remove Coin to watchlist dependent on user.
+  const handleAddToWatchlist = async (coinId, watchedCoins) => {
+    const userRef = doc(db, "subscriptions", auth.currentUser?.uid);
+
+    if (watchedCoins.includes(coinId)) {
+      // Remove the coin from the watchlist
+      await updateDoc(userRef, {
+        coins: arrayRemove(coinId),
+      });
+    } else {
+      // Add the coin to the watchlist
+      await updateDoc(userRef, {
+        coins: arrayUnion(coinId),
+      });
+    }
+  };
+
   return (
     <CryptoContext.Provider value={{ allCoins: allCoins }}>
-      <SubscriptionContext.Provider value={{ watchedCoins: watchedCoins }}>
+      <SubscriptionContext.Provider
+        value={{
+          watchedCoins: watchedCoins,
+          handleAddToWatchlist: handleAddToWatchlist,
+        }}
+      >
         <RouterProvider router={router} />
       </SubscriptionContext.Provider>
     </CryptoContext.Provider>

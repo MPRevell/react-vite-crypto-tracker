@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { db, auth } from "../firebase.config";
+import { auth } from "../firebase.config";
 import Table from "../components/CoinTable";
 import SubscriptionContext from "../contexts/SubscriptionContext";
 import CryptoContext from "../contexts/CryptoContext";

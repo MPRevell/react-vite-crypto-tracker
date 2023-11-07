@@ -21,6 +21,7 @@ function CoinTable({ data }) {
   const formatNumbers = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+  const { handleAddToWatchlist } = useContext(SubscriptionContext);
 
   const columns = useMemo(
     () => [
@@ -144,6 +145,9 @@ function CoinTable({ data }) {
               className={`inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700 ${
                 watchedCoin ? "bg-yellow-200" : ""
               }`}
+              onClick={() =>
+                handleAddToWatchlist(info.row.original.uuid, watchedCoins)
+              }
             >
               {watchedCoin ? "Remove" : "Add"}
             </a>
@@ -151,7 +155,7 @@ function CoinTable({ data }) {
         },
       },
     ],
-    [watchedCoins]
+    [watchedCoins, handleAddToWatchlist]
   );
 
   return (
