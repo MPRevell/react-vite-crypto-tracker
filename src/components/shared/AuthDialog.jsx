@@ -15,12 +15,17 @@ import { auth, Providers } from "../../firebase.config";
 import CustomTabPanel from "./CustomTabPanel";
 
 export default function AuthDialog(props) {
-  const { onClose, open } = props;
+  const { onClose, open, defaultOpenTab } = props;
+  console.log("defaultOpenTab:", defaultOpenTab);
 
-  const [activeTab, setActiveTab] = React.useState(0);
+  const [activeTab, setActiveTab] = React.useState(defaultOpenTab);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    setActiveTab(defaultOpenTab);
+  }, [defaultOpenTab]);
 
   const [formSignIn, setFormSignIn] = useState({
     username: "",

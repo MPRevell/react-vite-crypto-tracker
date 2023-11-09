@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { IconMoonFilled, IconMoon } from "@tabler/icons-react";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
 import AuthDialog from "./AuthDialog";
@@ -17,8 +18,10 @@ function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [open, setOpen] = React.useState(false);
+  const [defaultOpenTab, setDefaultOpenTab] = React.useState(0);
 
-  const handleModalOpen = () => {
+  const handleModalOpen = (activeTab) => (event) => {
+    setDefaultOpenTab(activeTab);
     setOpen(true);
   };
 
@@ -46,7 +49,11 @@ function Navbar() {
 
   return (
     <div id="app-container" className={theme}>
-      <AuthDialog open={open} onClose={handleModalClose} />
+      <AuthDialog
+        open={open}
+        defaultOpenTab={defaultOpenTab}
+        onClose={handleModalClose}
+      />
 
       <nav className="dark:bg-gray-950 bg-white">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -183,18 +190,24 @@ function Navbar() {
                     onClose={handleMenuClose}
                   >
                     {auth.currentUser ? (
-                      <MenuItem className="space-x-4" onClick={handleSignout}>
-                        Sign out
-                        <LogoutIcon />
+                      <MenuItem
+                        className="flex space-between"
+                        onClick={handleSignout}
+                      >
+                        Sign out <LogoutIcon />
                       </MenuItem>
                     ) : (
                       <div>
-                        <MenuItem onClick={handleModalOpen}>
-                          <LoginIcon />
+                        <MenuItem onClick={handleModalOpen(0)}>
+                          <ListItemIcon>
+                            <LoginIcon />
+                          </ListItemIcon>
                           Sign in
                         </MenuItem>
-                        <MenuItem onClick={handleModalOpen}>
-                          <FontAwesomeIcon icon={faUserPlus} />
+                        <MenuItem onClick={handleModalOpen(1)}>
+                          <ListItemIcon>
+                            <FontAwesomeIcon icon={faUserPlus} />
+                          </ListItemIcon>
                           Sign up
                         </MenuItem>
                       </div>

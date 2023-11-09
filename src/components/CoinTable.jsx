@@ -85,6 +85,7 @@ function CoinTable({ data }) {
               ),
               datasets: [
                 {
+                  label: "Dataset",
                   data: info
                     .getValue()
                     .map((str) => parseFloat(str).toFixed(2)),
@@ -145,9 +146,12 @@ function CoinTable({ data }) {
               className={`inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700 ${
                 watchedCoin ? "bg-yellow-200" : ""
               }`}
-              onClick={() =>
-                handleAddToWatchlist(info.row.original.uuid, watchedCoins)
-              }
+              onClick={(event) => {
+                event.stopPropagation();
+                event.preventDefault();
+
+                handleAddToWatchlist(info.row.original.uuid, watchedCoins);
+              }}
             >
               {watchedCoin ? "Remove" : "Add"}
             </a>
