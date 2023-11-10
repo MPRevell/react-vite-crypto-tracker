@@ -117,21 +117,38 @@ input,
 }
 
 @media (max-width: 980px) {
-  .coin-table th:nth-child(2) {
+  .coin-table th:nth-child(1) {
     display: none;
   }
 
-  .coin-table tbody tr td:nth-child(2) {
+  .coin-table tbody tr td:nth-child(1) {
     display: none;
   }
 }
 
 @media (max-width: 800px) {
-  .coin-table th:nth-child(3) {
+  .coin-table th:nth-child(1) {
     display: none;
   }
 
-  .coin-table tbody tr td:nth-child(3) {
+  .coin-table tbody tr td:nth-child(1) {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .coin-table th:nth-child(6) {
+    display: none;
+  }
+
+  .coin-table tbody tr td:nth-child(6) {
+    display: none;
+  }
+  .coin-table th:nth-child(5) {
+    display: none;
+  }
+
+  .coin-table tbody tr td:nth-child(5) {
     display: none;
   }
 }
