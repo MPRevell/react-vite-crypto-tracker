@@ -23,7 +23,7 @@ export default function WatchlistPage() {
   return (
     <>
       {auth.currentUser ? (
-        <div>
+        <div className="bg-white dark:bg-gray-950">
           <section className="dark:bg-gray-900 bg-white text-white">
             <div className="mx-auto w-full h-60px px-4 py-16">
               <div className="mx-auto max-w-3xl text-center">

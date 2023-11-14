@@ -92,8 +92,11 @@ function CoinTable({ data }) {
       {
         header: "Market Cap",
         accessorKey: "marketCap",
-        cell: (info) =>
-          `$${formatNumbers(parseFloat(info.getValue()).toFixed(2))}`,
+        cell: (info) => (
+          <div className="text-right">
+            $${formatNumbers(parseFloat(info.getValue()).toFixed(2))}
+          </div>
+        ),
       },
       {
         header: "7d Chart",
@@ -165,10 +168,10 @@ function CoinTable({ data }) {
           return (
             <a
               href="#"
-              className={`px-2 flex justify-center items-center text-xs font-medium text-white  ${
+              className={`px-2 flex justify-center items-center text-xs font-medium  ${
                 watchedCoin
                   ? "text-yellow-300"
-                  : "dark:text-gray-500 text-gray-950"
+                  : "dark:text-gray-500 text-gray-400"
               }`}
               onClick={(event) => {
                 event.stopPropagation();
@@ -218,9 +221,9 @@ const Table = ({ data, columns }) => {
   return (
     <>
       <div className="overflow-x-auto">
-        <div className="table-container sm:px-16 md:px-12 px-12 flex-col bg-white dark:bg-gray-950">
-          <table className="coin-table w-full text-sm rounded-lg text-left bg-sky-200 text-gray-500 dark:text-gray-400 text-left">
-            <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-200 rounded-lg ">
+        <div className="table-container bg-sky-100 w-full flex-col dark:bg-gray-950">
+          <table className="coin-table w-full text-sm rounded-lg bg-sky-200 text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-200">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
@@ -268,7 +271,7 @@ const Table = ({ data, columns }) => {
                   className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-slate-300 dark:hover:bg-gray-800"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-2 py-4">
+                    <td key={cell.id} className="px-3 py-3">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -290,14 +293,14 @@ const Table = ({ data, columns }) => {
                   {"<<"}
                 </button>
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-white bg-gray-200 dark:bg-gray-700  transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200 dark:bg-gray-700  transition-all"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
                   {"<"}
                 </button>
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200 dark:bg-gray-700 transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200 dark:bg-gray-700  transition-all"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                 >
