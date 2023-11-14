@@ -20,7 +20,7 @@ function Navbar() {
   const [open, setOpen] = React.useState(false);
   const [defaultOpenTab, setDefaultOpenTab] = React.useState(0);
 
-  const handleModalOpen = (activeTab) => (event) => {
+  const handleModalOpen = (activeTab) => () => {
     setDefaultOpenTab(activeTab);
     setOpen(true);
   };

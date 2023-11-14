@@ -220,7 +220,7 @@ const Table = ({ data, columns }) => {
       <div className="overflow-x-auto">
         <div className="table-container sm:px-16 md:px-12 px-12 flex-col bg-white dark:bg-gray-950">
           <table className="coin-table w-full text-sm rounded-lg text-left bg-sky-200 text-gray-500 dark:text-gray-400 text-left">
-            <thead className="text-xs text-white-700  bg-gray-950 dark:bg-gray-950 dark:text-gray-900 rounded-lg ">
+            <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-200 rounded-lg ">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
@@ -280,31 +280,31 @@ const Table = ({ data, columns }) => {
             </tbody>
           </table>
           {data.length >= 10 && (
-            <div className="coin-table-pagination-wrapper bottom-0 left-0 right-0 px-4 py-4 dark:text-white text-gray-700 dark:bg-gray-900">
+            <div className="coin-table-pagination-wrapper bottom-0 left-0 right-0 px-4 py-4 text-gray-700 dark:text-white bg-white dark:bg-gray-900">
               <div className="flex justify-center items-center gap-2 dark:dg-gray-950">
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200 transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200 dark:bg-gray-700  transition-all"
                   onClick={() => table.setPageIndex(0)}
                   disabled={!table.getCanPreviousPage()}
                 >
                   {"<<"}
                 </button>
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-white bg-gray-200  transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-white bg-gray-200 dark:bg-gray-700  transition-all"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
                   {"<"}
                 </button>
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200  transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200 dark:bg-gray-700 transition-all"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                 >
                   {">"}
                 </button>
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200  transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200 dark:bg-gray-700  transition-all"
                   onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                   disabled={!table.getCanNextPage()}
                 >
@@ -336,7 +336,7 @@ const Table = ({ data, columns }) => {
                   onChange={(e) => {
                     table.setPageSize(Number(e.target.value));
                   }}
-                  className="border rounded p-1 pagination-select bg-gray-200 dark:dg-gray-700"
+                  className="border rounded p-1 pagination-select bg-gray-200 dark:bg-gray-900"
                 >
                   {[10, 20, 30, 40, 50].map((pageSize) => (
                     <option key={pageSize} value={pageSize}>

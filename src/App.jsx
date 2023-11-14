@@ -75,55 +75,23 @@ function App() {
     doc(db, "subscriptions", auth.currentUser?.uid || "null")
   );
 
-  /* const [value, loading, error] = useDocument(
-    auth?.currentUser && doc("subscriptions", auth.currentUser.uid)
-  ); */
-
-  console.log("value", value);
-  //   console.log("value:", value?.data());
-
-  // console.log("watchedCoins", watchedCoins);
-
-  /*   const getAllSubscriptions = async () => {
-    const currentUserId = auth.currentUser?.uid;
-
-    // Directly query the subscription document using the current user ID
-    const userRef = doc(db, "subscriptions", currentUserId);
-    const userDoc = await getDoc(userRef);
-
-    if (userDoc.exists()) {
-      setWatchedCoins(userDoc.data().coins);
-    } else {
-      // Create a new watchlist document.
-      await setDoc(userRef, {
-        coins: [],
-        updatedTime: serverTimestamp(),
-        createdTime: serverTimestamp(),
-        userId: auth.currentUser?.uid,
-      });
+  useEffect(() => {
+    if (value) {
+      setWatchedCoins(value?.data()?.coins || []);
     }
-  }; */
+  }, [value, loading, error]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("user is logged in!!!");
-        // getAllSubscriptions();
+        console.log("User is logged in!");
         fetchAllCoins();
-        // ...
       } else {
-        console.log("no user!!!");
+        console.log("No user logged in!");
         fetchAllCoins();
       }
     });
   }, []);
-
-  useEffect(() => {
-    if (value) {
-      console.log("current value", value.data());
-      setWatchedCoins(value?.data()?.coins || []);
-    }
-  }, [value, loading, error]);
 
   // Adding or Remove Coin to watchlist dependent on user.
   const handleAddToWatchlist = async (coinId, watchedCoins) => {
