@@ -32,6 +32,7 @@ a {
 #app-container {
   justify-content: center;
   width: 100%;
+  height: 100vh;
 }
 
 .logo {
@@ -114,6 +115,31 @@ input,
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.coin-table th:nth-child(3),
+th:nth-child(4),
+th:nth-child(5),
+th:nth-child(6),
+tbody tr td:nth-child(3),
+tbody tr td:nth-child(4),
+tbody tr td:nth-child(5),
+tbody tr td:nth-child(6) {
+  text-align: right;
+}
+
+.coin-table th:nth-child(2) {
+  text-align: left;
+}
+
+tbody tr td:nth-child(7) {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+tbody tr td:nth-child(8) {
+  max-width: 100px;
 }
 
 @media (max-width: 980px) {

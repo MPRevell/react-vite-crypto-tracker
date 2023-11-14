@@ -20,6 +20,18 @@ function Navbar() {
   const [open, setOpen] = React.useState(false);
   const [defaultOpenTab, setDefaultOpenTab] = React.useState(0);
 
+  const checkAuthAndNavigateOrOpenModal = (event) => {
+    // Prevent default link behavior
+    event.preventDefault();
+    if (auth.currentUser) {
+      // This will check whether one of mu user's is logged in.
+      navigate("/watchlist");
+    } else {
+      // If the user is not logged in, open the modal with sign-in
+      handleModalOpen(0)();
+    }
+  };
+
   const handleModalOpen = (activeTab) => () => {
     setDefaultOpenTab(activeTab);
     setOpen(true);
@@ -126,12 +138,13 @@ function Navbar() {
                     Dashboard
                   </Link>
 
-                  <Link
-                    to="/watchlist"
+                  <a
+                    href="/watchlist"
+                    onClick={checkAuthAndNavigateOrOpenModal}
                     className="dark:text-gray-300 text-slate-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     Watchlist
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -217,13 +230,13 @@ function Navbar() {
           <div className="space-y-1 px-2 pb-3 pt-2">
             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
             <Link to="/">Dashboard</Link>
-
-            <Link
-              to="/watchlist"
+            <a
+              href="#"
+              onClick={checkAuthAndNavigateOrOpenModal}
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               Watchlist
-            </Link>
+            </a>
           </div>
         </div>
       </nav>

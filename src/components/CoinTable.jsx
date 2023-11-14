@@ -48,7 +48,7 @@ function CoinTable({ data }) {
         header: "Coin",
         accessorKey: "name",
         cell: (info) => (
-          <div className="coin">
+          <div className="coin text-left">
             <img
               src={info.row.original.iconUrl}
               alt="Logo"
@@ -65,8 +65,11 @@ function CoinTable({ data }) {
       {
         header: "Price",
         accessorKey: "price",
-        cell: (info) =>
-          `$${formatNumbers(parseFloat(info.getValue()).toFixed(2))}`,
+        cell: (info) => (
+          <div className="text-right">
+            ${formatNumbers(parseFloat(info.getValue()).toFixed(2))}
+          </div>
+        ),
       },
       {
         header: "Change (7d)",
@@ -94,7 +97,7 @@ function CoinTable({ data }) {
         accessorKey: "marketCap",
         cell: (info) => (
           <div className="text-right">
-            $${formatNumbers(parseFloat(info.getValue()).toFixed(2))}
+            ${formatNumbers(parseFloat(info.getValue()).toFixed(2))}
           </div>
         ),
       },
@@ -230,7 +233,7 @@ const Table = ({ data, columns }) => {
                     <th
                       key={header.id}
                       colSpan={header.colSpan}
-                      className="px-3 py-3 text-gray-200 bg-sky-100 dark:bg-gray-950 text-left "
+                      className="px-3 py-3 text-gray-200 bg-sky-100 dark:bg-gray-950 "
                       {...(header.column.getCanSort()
                         ? {
                             onClick: header.column.getToggleSortingHandler(),
