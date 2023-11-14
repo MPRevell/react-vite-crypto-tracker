@@ -20,6 +20,18 @@ Chart.register(CategoryScale);
 function CoinTable({ data }) {
   const { watchedCoins } = useContext(SubscriptionContext);
   console.log("watchedCoins:", watchedCoins);
+
+  const getLineColor = (sparklineData) => {
+    if (sparklineData.length < 2) return "white";
+
+    const startPrice = parseFloat(sparklineData[0]);
+    const endPrice = parseFloat(sparklineData[sparklineData.length - 1]);
+
+    if (endPrice > startPrice) return "#00FF5F"; // Green for price up
+    if (endPrice < startPrice) return "#FF0000"; // Red for price down
+    return "#FFFFFF"; // White for no change
+  };
+
   const formatNumbers = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -30,7 +42,7 @@ function CoinTable({ data }) {
       {
         header: "Rank",
         accessorKey: "rank",
-        cell: (info) => info.getValue(),
+        cell: (info) => <div className="px-6">{info.getValue()}</div>,
       },
       {
         header: "Coin",
@@ -80,64 +92,64 @@ function CoinTable({ data }) {
       {
         header: "7d Chart",
         accessorKey: "sparkline",
-        cell: (info) => (
-          <Line
-            className="flex items-center"
-            data={{
-              labels: Array.from({ length: info.getValue().length }, (_, i) =>
-                (i + 1).toString()
-              ),
-              datasets: [
-                {
-                  label: "Dataset",
-                  data: info
-                    .getValue()
-                    .map((str) => parseFloat(str).toFixed(2)),
+        cell: (info) => {
+          const lineColor = getLineColor(info.getValue());
+
+          return (
+            <Line
+              className="flex items-center"
+              data={{
+                labels: Array.from({ length: info.getValue().length }, (_, i) =>
+                  (i + 1).toString()
+                ),
+                datasets: [
+                  {
+                    label: "Price Trend",
+                    data: info.getValue().map((str) => parseFloat(str)),
+                    fill: false,
+                    pointRadius: 0,
+                    lineTension: 0.5,
+                    borderColor: lineColor, // Use the dynamic color here
+                    borderWidth: 3,
+                  },
+                ],
+              }}
+              options={{
+                plugins: {
                   legend: {
                     display: false,
                   },
-                  fill: false,
-                  pointRadius: 0,
-                  lineTension: 0.5,
-                  borderColor: "#00FF5F",
-                  borderWidth: 3,
                 },
-              ],
-            }}
-            options={{
-              scales: {
-                x: {
-                  display: false,
-                  grid: {
+                scales: {
+                  x: {
                     display: false,
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      display: false,
+                    },
                   },
-                  ticks: {
+                  y: {
                     display: false,
-                  },
-                },
-                y: {
-                  display: false,
-                  grid: {
-                    display: false,
-                  },
-                  ticks: {
-                    display: false,
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      display: false,
+                    },
                   },
                 },
-              },
-              responsive: true,
-              maintainAspectRatio: false,
-              title: {
-                display: false,
-              },
-            }}
-            style={{
-              height: 60,
-              width: 100,
-              color: "#FE1040",
-            }}
-          />
-        ),
+                responsive: true,
+                maintainAspectRatio: false,
+              }}
+              style={{
+                height: 60,
+                width: 100,
+              }}
+            />
+          );
+        },
       },
       {
         header: "Add to watchlist",
@@ -147,7 +159,7 @@ function CoinTable({ data }) {
           return (
             <a
               href="#"
-              className={`flex justify-center items-center rounded bg-indigo-600 text-xs font-medium text-white hover:bg-indigo-700 ${
+              className={`px-2 flex justify-center items-center rounded bg-indigo-600 text-xs font-medium text-white hover:bg-indigo-700 ${
                 watchedCoin ? "" : ""
               }`}
               onClick={(event) => {
@@ -198,7 +210,7 @@ const Table = ({ data, columns }) => {
   return (
     <>
       <div className="overflow-x-auto">
-        <div className="table-container sm:px-4 md:px-16 flex-col bg-white dark:bg-gray-950">
+        <div className="table-container sm:px-16 md:px-4 flex-col bg-white dark:bg-gray-950">
           <table className="coin-table w-full text-sm rounded-lg text-left bg-sky-200 text-gray-500 dark:text-gray-400 text-left">
             <thead className="text-xs text-white-700  bg-gray-950 dark:bg-gray-950 dark:text-gray-900 rounded-lg ">
               {table.getHeaderGroups().map((headerGroup) => (
@@ -316,7 +328,7 @@ const Table = ({ data, columns }) => {
                   onChange={(e) => {
                     table.setPageSize(Number(e.target.value));
                   }}
-                  className="border rounded p-1"
+                  className="border rounded p-1 pagination-select"
                 >
                   {[10, 20, 30, 40, 50].map((pageSize) => (
                     <option key={pageSize} value={pageSize}>
@@ -325,9 +337,7 @@ const Table = ({ data, columns }) => {
                   ))}
                 </select>
               </div>
-              <div className="text-center">
-                {table.getRowModel().rows.length} Rows
-              </div>
+              <div className="text-center"></div>
             </div>
           )}
         </div>

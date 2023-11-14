@@ -85,7 +85,7 @@ const About = () => {
                       : "text-red-600"
                   }`}
                 >
-                  {parseFloat(data.change).toFixed(2)}%
+                  {parseFloat(data.change).toFixed(2)}% ({timePeriodState})
                 </span>
               </div>
             </div>
@@ -176,7 +176,7 @@ const About = () => {
               <div>
                 <IconPercentage className="text-gray-500 dark:text-gray-400" />
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Price change for time period
+                  Price change % ({timePeriodState})
                 </p>
                 <p className="font-bold text-l text-gray-900 dark:text-white">
                   {parseFloat(data.change).toFixed(2)}%

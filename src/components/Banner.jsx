@@ -16,7 +16,7 @@ function Banner({ searchTerm, setSearchTerm }) {
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                className="dark:bg-gray-950 bg-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
               />
             </div>
           </div>
