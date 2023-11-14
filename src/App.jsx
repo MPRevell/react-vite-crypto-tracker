@@ -82,7 +82,7 @@ function App() {
     if ((!loading && !error) || value) {
       setWatchedCoins(value?.data().coins);
     }
-  }, [value]);
+  }, [value, loading, error]);
 
   console.log("watchedCoins", watchedCoins);
 

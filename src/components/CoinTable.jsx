@@ -9,6 +9,8 @@ import {
   getSortedRowModel,
   flexRender,
 } from "@tanstack/react-table";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 import SubscriptionContext from "../contexts/SubscriptionContext";
 
@@ -41,8 +43,10 @@ function CoinTable({ data }) {
               width={25}
               height="auto"
             />
-            <h4>{info.row.original.name}</h4>
-            <small>{info.row.original.symbol}</small>
+            <div className="coin-detail px-2">
+              <h4>{info.row.original.name}</h4>
+              <small>{info.row.original.symbol}</small>
+            </div>
           </div>
         ),
       },
@@ -143,8 +147,8 @@ function CoinTable({ data }) {
           return (
             <a
               href="#"
-              className={`inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700 ${
-                watchedCoin ? "bg-yellow-200" : ""
+              className={`flex justify-center items-center rounded bg-indigo-600 text-xs font-medium text-white hover:bg-indigo-700 ${
+                watchedCoin ? "" : ""
               }`}
               onClick={(event) => {
                 event.stopPropagation();
@@ -153,7 +157,7 @@ function CoinTable({ data }) {
                 handleAddToWatchlist(info.row.original.uuid, watchedCoins);
               }}
             >
-              {watchedCoin ? "Remove" : "Add"}
+              {watchedCoin ? <StarIcon /> : <StarBorderIcon />}
             </a>
           );
         },
@@ -203,7 +207,7 @@ const Table = ({ data, columns }) => {
                     <th
                       key={header.id}
                       colSpan={header.colSpan}
-                      className="px-6 py-3 text-left text-gray-200 bg-sky-100 dark:bg-gray-950 text-left "
+                      className="px-3 py-3 text-gray-200 bg-sky-100 dark:bg-gray-950 text-left "
                       {...(header.column.getCanSort()
                         ? {
                             onClick: header.column.getToggleSortingHandler(),
@@ -244,7 +248,7 @@ const Table = ({ data, columns }) => {
                   className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 hover:bg-slate-300 dark:hover:bg-gray-800"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-6 py-4">
+                    <td key={cell.id} className="px-2 py-4">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
