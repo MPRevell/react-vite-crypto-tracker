@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import { useDocument } from "react-firebase-hooks/firestore";
 import {
   arrayUnion,
   arrayRemove,
@@ -72,7 +73,20 @@ function App() {
     }
   };
 
-  const getAllSubscriptions = async () => {
+  const [value, loading, error] = useDocument(
+    doc(db, "subscriptions", auth.currentUser?.uid || "null")
+  );
+  //   console.log("value:", value?.data());
+
+  useEffect(() => {
+    if ((!loading && !error) || value) {
+      setWatchedCoins(value?.data().coins);
+    }
+  }, [value]);
+
+  console.log("watchedCoins", watchedCoins);
+
+  /*   const getAllSubscriptions = async () => {
     const currentUserId = auth.currentUser?.uid;
 
     // Directly query the subscription document using the current user ID
@@ -90,13 +104,13 @@ function App() {
         userId: auth.currentUser?.uid,
       });
     }
-  };
+  }; */
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("user is logged in!!!");
-        getAllSubscriptions();
+        // getAllSubscriptions();
         fetchAllCoins();
         // ...
       } else {
