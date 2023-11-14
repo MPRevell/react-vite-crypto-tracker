@@ -69,11 +69,11 @@ function CoinTable({ data }) {
           `$${formatNumbers(parseFloat(info.getValue()).toFixed(2))}`,
       },
       {
-        header: "Change",
+        header: "Change (7d)",
         accessorKey: "change",
         cell: (info) => (
           <span
-            className={`text-xs font-medium ${
+            className={`text-xs font-medium text-right ${
               parseFloat(info.getValue()) > 0
                 ? "text-green-600"
                 : "text-red-600"
@@ -82,6 +82,12 @@ function CoinTable({ data }) {
             {parseFloat(info.getValue()).toFixed(2)}%
           </span>
         ),
+      },
+      {
+        header: "24hr Volume",
+        accessorKey: "24hVolume",
+        cell: (info) =>
+          `$${formatNumbers(parseFloat(info.getValue()).toFixed(2))}`,
       },
       {
         header: "Market Cap",
@@ -144,8 +150,8 @@ function CoinTable({ data }) {
                 maintainAspectRatio: false,
               }}
               style={{
-                height: 60,
-                width: 100,
+                maxWidth: "230px",
+                maxHeight: "70px",
               }}
             />
           );
@@ -160,7 +166,7 @@ function CoinTable({ data }) {
             <a
               href="#"
               className={`px-2 flex justify-center items-center rounded bg-indigo-600 text-xs font-medium text-white hover:bg-indigo-700 ${
-                watchedCoin ? "" : ""
+                watchedCoin ? "text-yellow-300" : ""
               }`}
               onClick={(event) => {
                 event.stopPropagation();
@@ -309,7 +315,7 @@ const Table = ({ data, columns }) => {
                     {table.getPageCount()}
                   </strong>
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1 pagination-shortcut">
                   | Go to page:
                   <input
                     type="number"

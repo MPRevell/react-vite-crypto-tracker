@@ -126,17 +126,27 @@ input,
   }
 }
 
-@media (max-width: 800px) {
-  .coin-table th:nth-child(1) {
+@media (max-width: 900px) {
+  .coin-table th:nth-child(7) {
     display: none;
   }
 
-  .coin-table tbody tr td:nth-child(1) {
+  .coin-table tbody tr td:nth-child(7) {
     display: none;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 750px) {
+  .coin-table th:nth-child(5) {
+    display: none;
+  }
+
+  .coin-table tbody tr td:nth-child(5) {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
   .coin-table th:nth-child(6) {
     display: none;
   }
@@ -144,11 +154,14 @@ input,
   .coin-table tbody tr td:nth-child(6) {
     display: none;
   }
-  .coin-table th:nth-child(5) {
+
+  .pagination-select {
     display: none;
   }
+}
 
-  .coin-table tbody tr td:nth-child(5) {
+@media (max-width: 5000px) {
+  .pagination-shortcut {
     display: none;
   }
 }
