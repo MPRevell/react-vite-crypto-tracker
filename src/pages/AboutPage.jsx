@@ -131,7 +131,7 @@ const About = () => {
               />
             </div>
             {/* Time Period Buttons */}
-            <div className="coin-chart-buttons flex items-center mt-4 space-x-2 p-2 border-2 rounded-md border-slate-900 bg-white dark:bg-gray-800">
+            <div className="coin-chart-buttons flex items-center mt-4 space-x-2 p-2 border-2 rounded-md border-slate-900">
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 Time Period:
               </span>
@@ -151,16 +151,14 @@ const About = () => {
             </div>
           </div>
           <div className="coin-stats text-left flex-start mx-auto max-w-7xl py-4 px-2 sm:px-6 lg:px-8">
-            <h3 className="coin-stats-title font-bold text-l text-gray-900 dark:text-white">
+            <h3 className="coin-stats-title font-bold text-l text-gray-700 dark:text-white">
               Value statistics:
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 sm:grid-cols-2 gap-4 mt-4">
+            <div className="grid text-gray-700 grid-cols-2 md:grid-cols-4 sm:grid-cols-2 gap-4 mt-4">
               <div>
                 <IconTrophy className="text-gray-500 dark:text-gray-400" />
                 <p className="text-sm text-gray-500 dark:text-gray-400">Rank</p>
-                <p className="font-bold text-l text-gray-900 dark:text-white">
-                  {data.rank}
-                </p>
+                <p className="font-bold text-l dark:text-white">{data.rank}</p>
               </div>
 
               <div>
@@ -168,7 +166,7 @@ const About = () => {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Price
                 </p>
-                <p className="font-bold text-l text-gray-900 dark:text-white">
+                <p className="font-bold text-l dark:text-white">
                   ${formatNumbers(parseFloat(data.price).toFixed(2))}
                 </p>
               </div>
@@ -178,7 +176,7 @@ const About = () => {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Price change % ({timePeriodState})
                 </p>
-                <p className="font-bold text-l text-gray-900 dark:text-white">
+                <p className="font-bold text-l dark:text-white">
                   {parseFloat(data.change).toFixed(2)}%
                 </p>
               </div>
@@ -188,7 +186,7 @@ const About = () => {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   24h volume
                 </p>
-                <p className="font-bold text-l text-gray-900 dark:text-white">
+                <p className="font-bold text-l dark:text-white">
                   ${formatNumbers(parseFloat(data["24hVolume"]).toFixed(2))}
                 </p>
               </div>
@@ -198,7 +196,7 @@ const About = () => {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Market cap
                 </p>
-                <p className="font-bold text-l text-gray-900 dark:text-white">
+                <p className="font-bold text-l dark:text-white">
                   ${formatNumbers(parseFloat(data.marketCap).toFixed(2))}
                 </p>
               </div>
@@ -208,7 +206,7 @@ const About = () => {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Volume / Market cap
                 </p>
-                <p className="font-bold text-l text-gray-900 dark:text-white">
+                <p className="font-bold text-l dark:text-white">
                   {(
                     volMarketCap(
                       parseFloat(data["24hVolume"]),
@@ -224,7 +222,7 @@ const About = () => {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Fully diluted market cap
                 </p>
-                <p className="font-bold text-l text-gray-900 dark:text-white">
+                <p className="font-bold text-l dark:text-white">
                   $
                   {formatNumbers(
                     parseFloat(data.fullyDilutedMarketCap).toFixed(2)
@@ -237,7 +235,7 @@ const About = () => {
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   All-time high
                 </p>
-                <p className="font-bold text-l text-gray-900 dark:text-white">
+                <p className="font-bold text-l dark:text-white">
                   $
                   {formatNumbers(parseFloat(data.allTimeHigh.price).toFixed(2))}
                 </p>

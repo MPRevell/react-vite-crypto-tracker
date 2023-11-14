@@ -125,18 +125,12 @@ function Navbar() {
                   >
                     Dashboard
                   </Link>
-                  <a
-                    href="#"
-                    className="dark:text-gray-300 text-gray-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Watchlist
-                  </a>
 
                   <Link
-                    to="/test"
+                    to="/watchlist"
                     className="dark:text-gray-300 text-slate-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
-                    Test
+                    Watchlist
                   </Link>
                 </div>
               </div>
@@ -224,12 +218,12 @@ function Navbar() {
             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
             <Link to="/">Dashboard</Link>
 
-            <a
-              href="#"
+            <Link
+              to="/watchlist"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
             >
               Watchlist
-            </a>
+            </Link>
           </div>
         </div>
       </nav>

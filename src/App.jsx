@@ -52,8 +52,6 @@ function App() {
   const [watchedCoins, setWatchedCoins] = useState([]);
   const [allCoins, setAllCoins] = useState([]);
 
-  console.log("auth.currentUser", auth.currentUser);
-
   const fetchAllCoins = async () => {
     try {
       const response = await axios.get(
@@ -76,15 +74,15 @@ function App() {
   const [value, loading, error] = useDocument(
     doc(db, "subscriptions", auth.currentUser?.uid || "null")
   );
+
+  /* const [value, loading, error] = useDocument(
+    auth?.currentUser && doc("subscriptions", auth.currentUser.uid)
+  ); */
+
+  console.log("value", value);
   //   console.log("value:", value?.data());
 
-  useEffect(() => {
-    if ((!loading && !error) || value) {
-      setWatchedCoins(value?.data().coins);
-    }
-  }, [value, loading, error]);
-
-  console.log("watchedCoins", watchedCoins);
+  // console.log("watchedCoins", watchedCoins);
 
   /*   const getAllSubscriptions = async () => {
     const currentUserId = auth.currentUser?.uid;
@@ -120,8 +118,16 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    if (value) {
+      console.log("current value", value.data());
+      setWatchedCoins(value?.data()?.coins || []);
+    }
+  }, [value, loading, error]);
+
   // Adding or Remove Coin to watchlist dependent on user.
   const handleAddToWatchlist = async (coinId, watchedCoins) => {
+    console.log("handleAddToWatchlist");
     const userRef = doc(db, "subscriptions", auth.currentUser?.uid);
 
     if (watchedCoins.includes(coinId)) {

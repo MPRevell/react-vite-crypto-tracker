@@ -19,7 +19,7 @@ Chart.register(CategoryScale);
 
 function CoinTable({ data }) {
   const { watchedCoins } = useContext(SubscriptionContext);
-  console.log("watchedCoins:", watchedCoins);
+  console.log("CoinTable watchedCoins:", watchedCoins);
 
   const getLineColor = (sparklineData) => {
     if (sparklineData.length < 2) return "white";
@@ -28,7 +28,7 @@ function CoinTable({ data }) {
     const endPrice = parseFloat(sparklineData[sparklineData.length - 1]);
 
     if (endPrice > startPrice) return "#00FF5F"; // Green for price up
-    if (endPrice < startPrice) return "#FF0000"; // Red for price down
+    if (endPrice < startPrice) return "#f44336"; // Red for price down
     return "#FFFFFF"; // White for no change
   };
 
@@ -165,8 +165,10 @@ function CoinTable({ data }) {
           return (
             <a
               href="#"
-              className={`px-2 flex justify-center items-center rounded bg-indigo-600 text-xs font-medium text-white hover:bg-indigo-700 ${
-                watchedCoin ? "text-yellow-300" : ""
+              className={`px-2 flex justify-center items-center text-xs font-medium text-white  ${
+                watchedCoin
+                  ? "text-yellow-300"
+                  : "dark:text-gray-500 text-gray-950"
               }`}
               onClick={(event) => {
                 event.stopPropagation();
@@ -216,7 +218,7 @@ const Table = ({ data, columns }) => {
   return (
     <>
       <div className="overflow-x-auto">
-        <div className="table-container sm:px-16 md:px-4 flex-col bg-white dark:bg-gray-950">
+        <div className="table-container sm:px-16 md:px-12 px-12 flex-col bg-white dark:bg-gray-950">
           <table className="coin-table w-full text-sm rounded-lg text-left bg-sky-200 text-gray-500 dark:text-gray-400 text-left">
             <thead className="text-xs text-white-700  bg-gray-950 dark:bg-gray-950 dark:text-gray-900 rounded-lg ">
               {table.getHeaderGroups().map((headerGroup) => (
@@ -278,31 +280,31 @@ const Table = ({ data, columns }) => {
             </tbody>
           </table>
           {data.length >= 10 && (
-            <div className="coin-table-pagination-wrapper bottom-0 left-0 right-0 px-4 py-4 dark:text-white text-gray-700 bg-white dark:bg-gray-900">
+            <div className="coin-table-pagination-wrapper bottom-0 left-0 right-0 px-4 py-4 dark:text-white text-gray-700 dark:bg-gray-900">
               <div className="flex justify-center items-center gap-2 dark:dg-gray-950">
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200 transition-all"
                   onClick={() => table.setPageIndex(0)}
                   disabled={!table.getCanPreviousPage()}
                 >
                   {"<<"}
                 </button>
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-white bg-gray-200  transition-all"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
                   {"<"}
                 </button>
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200  transition-all"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                 >
                   {">"}
                 </button>
                 <button
-                  className="border rounded-full px-3 py-1 hover:bg-gray-700 transition-all"
+                  className="border rounded-full px-3 py-1 hover:bg-gray-700 bg-gray-200  transition-all"
                   onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                   disabled={!table.getCanNextPage()}
                 >
@@ -326,7 +328,7 @@ const Table = ({ data, columns }) => {
                         : 0;
                       table.setPageIndex(page);
                     }}
-                    className="border p-1 rounded w-16"
+                    className="border p-1 rounded w-16 "
                   />
                 </span>
                 <select
@@ -334,7 +336,7 @@ const Table = ({ data, columns }) => {
                   onChange={(e) => {
                     table.setPageSize(Number(e.target.value));
                   }}
-                  className="border rounded p-1 pagination-select"
+                  className="border rounded p-1 pagination-select bg-gray-200 dark:dg-gray-700"
                 >
                   {[10, 20, 30, 40, 50].map((pageSize) => (
                     <option key={pageSize} value={pageSize}>

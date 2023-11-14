@@ -1,7 +1,7 @@
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Home from "./pages/HomePage";
-import Test from "./pages/TestPage";
+import Watchlist from "./pages/WatchlistPage";
 import About from "./pages/AboutPage";
 
 const routes = [
@@ -20,9 +20,9 @@ const routes = [
   },
 
   {
-    path: "/test",
-    component: Test,
-    name: "Test Page",
+    path: "/watchlist",
+    component: Watchlist,
+    name: "Watchlist Page",
     protected: true,
   },
 
