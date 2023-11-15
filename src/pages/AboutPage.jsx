@@ -131,7 +131,7 @@ const About = () => {
               />
             </div>
             {/* Time Period Buttons */}
-            <div className="coin-chart-buttons flex items-center mt-4 space-x-2 p-2 border-2 rounded-md border-slate-900">
+            <div className="coin-chart-buttons flex items-center mt-4 space-x-2 p-2 border-2 rounded-md dark:border-slate-900 border-slate-200">
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 Time Period:
               </span>
@@ -139,7 +139,7 @@ const About = () => {
                 <button
                   key={timePeriod}
                   onClick={() => handleChangeTimePeriodState(timePeriod)}
-                  className={`px-2 py-1 text-sm rounded-md hover:bg-blue-600 dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 ${
+                  className={`px-2 py-1 text-sm hover:bg-blue-600 dark:hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 dark:bg-blue-700 bg-blue-200 border-hidden ${
                     timePeriod === timePeriodState
                       ? "bg-blue-500 text-white dark:bg-blue-700"
                       : "text-gray-800 dark:text-gray-200"

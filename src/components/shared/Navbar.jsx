@@ -11,6 +11,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import CryptoReactImage from "../../images/CryptoReactImage.png";
+import CryptoReactUser from "../../images/CryptoReactUser.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -122,7 +124,7 @@ function Navbar() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src={CryptoReactImage}
                     alt="Your Company"
                   />
                 </div>
@@ -169,11 +171,11 @@ function Navbar() {
                       aria-haspopup="true"
                       onClick={handleMenu}
                     >
-                      <span className="absolute -inset-1.5" />
+                      <span />
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-5 w-5 rounded-full"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                        src={CryptoReactUser}
                         alt="Profile Avatar"
                       />
                     </button>
