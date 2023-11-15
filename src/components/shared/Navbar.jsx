@@ -12,7 +12,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import CryptoReactImage from "../../images/CryptoReactImage.png";
-import CryptoReactUser from "../../images/CryptoReactUser.png";
+import CryptoReactUser from "../../images/CryptoReactUserCropped.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -121,14 +121,14 @@ function Navbar() {
                 </button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
+                <div className="relative flex flex-shrink-0 items-center">
                   <img
-                    className="h-8 w-auto"
+                    className="crypto-logo h-8 w-auto"
                     src={CryptoReactImage}
                     alt="Your Company"
                   />
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
+                <div className="hidden sm:ml-6 sm:flex items-center">
                   <div className="flex space-x-4">
                     {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                     <Link
@@ -165,7 +165,7 @@ function Navbar() {
                   <div>
                     <button
                       type="button"
-                      className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      className="user-button p-1 relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       id="user-menu-button"
                       aria-expanded="false"
                       aria-haspopup="true"
@@ -174,7 +174,7 @@ function Navbar() {
                       <span />
                       <span className="sr-only">Open user menu</span>
                       <img
-                        className="h-5 w-5 rounded-full"
+                        className="h-5 w-5 rounded-full fill-white"
                         src={CryptoReactUser}
                         alt="Profile Avatar"
                       />

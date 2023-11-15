@@ -128,7 +128,8 @@ tbody tr td:nth-child(6) {
   text-align: right;
 }
 
-.coin-table th:nth-child(2) {
+.coin-table th:nth-child(2),
+th:nth-child(8) {
   text-align: left;
 }
 
@@ -142,10 +143,21 @@ tbody tr td:nth-child(8) {
   max-width: 100px;
 }
 
+img .crypto-logo {
+  height: auto; /* Adjust height proportionally */
+  width: 10rem; /* Increase width */
+  object-fit: contain; /* Ensures the image is scaled correctly */
+}
+
 img .user-icon-button {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+button .user-button {
+  padding: 0;
+  margin: 0;
 }
 
 @media (max-width: 980px) {
