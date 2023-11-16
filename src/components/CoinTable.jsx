@@ -20,7 +20,6 @@ Chart.register(...registerables);
 Chart.register(CategoryScale);
 
 function CoinTable({ data }) {
-  const navigate = useNavigate();
   const { watchedCoins } = useContext(SubscriptionContext);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const handleAuthModalOpen = () => setIsAuthModalOpen(true);
@@ -170,7 +169,7 @@ function CoinTable({ data }) {
         },
       },
       {
-        header: "Add to watchlist",
+        header: "Add to Watchlist",
         accessorKey: "watchlist",
         cell: (info) => {
           const watchedCoin = watchedCoins.includes(info.row.original.uuid);
