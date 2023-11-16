@@ -6,6 +6,7 @@ function Banner({ searchTerm, setSearchTerm }) {
           <h1 className="bg-gradient-to-r from-sky-300 via-blue-300 to-blue-900  dark:from-green-300 dark:via-blue-500 dark:to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
             Explore the Cryptoverse.
             <span className="sm:block">
+              {" "}
               Learn more about your favourite cryptocurrencies...
             </span>
           </h1>

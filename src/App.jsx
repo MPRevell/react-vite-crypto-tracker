@@ -75,6 +75,23 @@ function App() {
     doc(db, "subscriptions", auth.currentUser?.uid || "null")
   );
 
+  const createNewSubscriptions = async () => {
+    const currentUserId = auth.currentUser?.uid;
+
+    // Directly query the subscription document using the current user ID
+    const userRef = doc(db, "subscriptions", currentUserId);
+    const userDoc = await getDoc(userRef);
+
+    if (!userDoc.exists()) {
+      await setDoc(userRef, {
+        coins: [],
+        updatedTime: serverTimestamp(),
+        createdTime: serverTimestamp(),
+        userId: auth.currentUser?.uid,
+      });
+    }
+  };
+
   useEffect(() => {
     if (value) {
       setWatchedCoins(value?.data()?.coins || []);
@@ -85,6 +102,7 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("User is logged in!");
+        createNewSubscriptions();
         fetchAllCoins();
       } else {
         console.log("No user logged in!");
