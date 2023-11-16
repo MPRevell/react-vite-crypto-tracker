@@ -1,5 +1,5 @@
 import { useState, useMemo, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import { CategoryScale, Chart, registerables } from "chart.js";
 import {
@@ -11,6 +11,9 @@ import {
 } from "@tanstack/react-table";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { auth } from "../firebase.config";
+import * as React from "react";
+import Tooltip from "@mui/material/Tooltip";
 
 import SubscriptionContext from "../contexts/SubscriptionContext";
 
@@ -18,6 +21,7 @@ Chart.register(...registerables);
 Chart.register(CategoryScale);
 
 function CoinTable({ data }) {
+  const navigate = useNavigate();
   const { watchedCoins } = useContext(SubscriptionContext);
   console.log("CoinTable watchedCoins:", watchedCoins);
 
@@ -35,6 +39,7 @@ function CoinTable({ data }) {
   const formatNumbers = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+
   const { handleAddToWatchlist } = useContext(SubscriptionContext);
 
   const columns = useMemo(
@@ -168,23 +173,46 @@ function CoinTable({ data }) {
         accessorKey: "watchlist",
         cell: (info) => {
           const watchedCoin = watchedCoins.includes(info.row.original.uuid);
+          if (!auth.currentUser) {
+            return (
+              <Tooltip title="Sign-in to add">
+                <div>
+                  <span
+                    className={`px-2 flex justify-center items-center text-xs font-medium  ${
+                      watchedCoin
+                        ? "text-yellow-300"
+                        : "dark:text-gray-500 text-gray-400"
+                    }`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      event.preventDefault();
+                      navigate("/signin");
+                    }}
+                  >
+                    {watchedCoin ? <StarIcon /> : <StarBorderIcon />}
+                  </span>
+                </div>
+              </Tooltip>
+            );
+          }
           return (
-            <a
-              href="#"
-              className={`px-2 flex justify-center items-center text-xs font-medium  ${
-                watchedCoin
-                  ? "text-yellow-300"
-                  : "dark:text-gray-500 text-gray-400"
-              }`}
-              onClick={(event) => {
-                event.stopPropagation();
-                event.preventDefault();
-
-                handleAddToWatchlist(info.row.original.uuid, watchedCoins);
-              }}
-            >
-              {watchedCoin ? <StarIcon /> : <StarBorderIcon />}
-            </a>
+            <div>
+              <a
+                href="#"
+                className={`px-2 flex justify-center items-center text-xs font-medium  ${
+                  watchedCoin
+                    ? "text-yellow-300"
+                    : "dark:text-gray-500 text-gray-400"
+                }`}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  event.preventDefault();
+                  handleAddToWatchlist(info.row.original.uuid, watchedCoins);
+                }}
+              >
+                {watchedCoin ? <StarIcon /> : <StarBorderIcon />}
+              </a>
+            </div>
           );
         },
       },
