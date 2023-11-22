@@ -25,11 +25,20 @@ function CoinTable({ data }) {
   const handleAuthModalOpen = () => setIsAuthModalOpen(true);
   const handleAuthModalClose = () => setIsAuthModalOpen(false);
 
-  const getLineColor = (sparklineData) => {
-    if (sparklineData.length < 2) return "white";
+  console.log("all data", data);
 
-    const startPrice = parseFloat(sparklineData[0]);
-    const endPrice = parseFloat(sparklineData[sparklineData.length - 1]);
+  const getLineColor = (sparklineData) => {
+    // Array has changed where 'null' is last element so filtering out the numeric values first.
+    const numericData = sparklineData.row.original.sparkline.filter(
+      (value) => !isNaN(parseFloat(value)) && value != null
+    );
+
+    if (numericData.length < 2) return "white";
+
+    const startPrice = parseFloat(numericData[0]);
+    const endPrice = parseFloat(numericData[numericData.length - 1]);
+
+    console.log("Start Price:", startPrice, "End Price:", endPrice);
 
     if (endPrice > startPrice) return "#00FF5F"; // Green for price up
     if (endPrice < startPrice) return "#f44336"; // Red for price down
@@ -110,11 +119,13 @@ function CoinTable({ data }) {
         header: "7d Chart",
         accessorKey: "sparkline",
         cell: (info) => {
-          const lineColor = getLineColor(info.getValue());
+          const lineColor = getLineColor(info);
+
+          console.log("info for sparkline", info);
 
           return (
             <Line
-              className="flex items-center"
+              className="flex items-center pl-12"
               data={{
                 labels: Array.from({ length: info.getValue().length }, (_, i) =>
                   (i + 1).toString()
@@ -126,7 +137,7 @@ function CoinTable({ data }) {
                     fill: false,
                     pointRadius: 0,
                     lineTension: 0.5,
-                    borderColor: lineColor, // Use the dynamic color here
+                    borderColor: lineColor,
                     borderWidth: 3,
                   },
                 ],
